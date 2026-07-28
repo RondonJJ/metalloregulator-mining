@@ -1,0 +1,151 @@
+genome	accession	families	has_metalnet_site	contig	upstream_1	downstream_1	n_neighbors_500bp	metal_within_200bp	metal_within_500bp	metal_neighbor	nearest_metal_gene	nearest_metal_gap_bp
+Mavi_homi	WP_003872558.1	LysR_ModE	no	NZ_CP036220.2	mihF|479bp|other	pyrF|5bp|other	2	no	no			
+Mavi_homi	WP_003873121.1	GntR_LldR	yes	NZ_CP036220.2	SDR family oxidoreductase|19bp|other	CaiB/BaiF CoA-transferase fami|95bp|other	2	no	no			
+Mavi_homi	WP_003873870.1	PbrR;ecZntR	no	NZ_CP036220.2	AAA family ATPase|142bp|other	dnaJ|0bp|other	2	no	no			
+Mavi_homi	WP_003874019.1	TetR_SczA	NA	NZ_CP036220.2	MFS transporter|282bp|generic_transport_nonmetal	ABC transporter substrate-bind|57bp|generic_transport_nonmetal	2	no	no			
+Mavi_homi	WP_003874104.1	CsoR_bsCsoR	yes	NZ_CP036220.2	MFS transporter|122bp|generic_transport_nonmetal	ilvD|120bp|other	2	no	no		mymT	4461
+Mavi_homi	WP_003874151.1	GntR_LldR	yes	NZ_CP036220.2	LLM class flavin-dependent oxi|11bp|other	LLM class flavin-dependent oxi|61bp|other	2	no	no			
+Mavi_homi	WP_003874166.1	GntR_LldR	yes	NZ_CP036220.2	fadD5|183bp|other	SRPBCC family protein|0bp|other	3	no	no			
+Mavi_homi	WP_003874235.1	CsoR_bsCsoR	no	NZ_CP036220.2	DUF302 domain-containing prote|46bp|hypothetical_uncharacterized	metallophosphoesterase family |73bp|other	3	no	no			
+Mavi_homi	WP_003874323.1	TetR_SczA	no	NZ_CP036220.2	acyl-CoA dehydrogenase|200bp|other	DUF1214 domain-containing prot|77bp|hypothetical_uncharacterized	2	no	no			
+Mavi_homi	WP_003874674.1	PbrR;ecZntR	NA	NZ_CP036220.2	DUF1360 domain-containing prot|75bp|hypothetical_uncharacterized	Hsp20/alpha crystallin family |151bp|other	2	no	no			
+Mavi_homi	WP_003875160.1	DtxR_bsMntR	yes	NZ_CP036220.2	bifunctional riboflavin kinase|113bp|other	acyl-CoA dehydrogenase family |163bp|other	2	no	no			
+Mavi_homi	WP_003875762.1	TetR_SczA	no	NZ_CP036220.2	SDR family oxidoreductase|1223bp|other	cytochrome P450|0bp|other	2	no	no			
+Mavi_homi	WP_003875976.1	PbrR;ecZntR	no	NZ_CP036220.2	hypothetical protein|196bp|hypothetical_uncharacterized	GGDEF domain-containing protei|279bp|other	2	no	no			
+Mavi_homi	WP_003877217.1	BsCzrA;mtNmtR	yes	NZ_CP036220.2	hypothetical protein|53bp|hypothetical_uncharacterized	nucleoside deaminase|43bp|other	3	no	no			
+Mavi_homi	WP_003877537.1	TetR_SczA	no	NZ_CP036220.2	glmU|357bp|other	lysA|76bp|other	2	no	no		arsC	2923
+Mavi_homi	WP_003877960.1	BsCzrA;mtNmtR	no	NZ_CP036220.2	MBL fold metallo-hydrolase|111bp|other	SRPBCC family protein|0bp|other	3	no	no			
+Mavi_homi	WP_003878320.1	BsCzrA;mtNmtR	yes	NZ_CP036220.2	hypothetical protein|482bp|hypothetical_uncharacterized	Fur family transcriptional reg|0bp|other_regulator	3	no	no			
+Mavi_homi	WP_003879062.1	LysR_ModE	no	NZ_CP036220.2	TetR/AcrR family transcription|106bp|other_regulator	alpha/beta fold hydrolase|77bp|other	2	no	no			
+Mavi_homi	WP_003879269.1	TetR_SczA	no	NZ_CP036220.2	endonuclease domain-containing|60bp|other	RND family transporter|0bp|generic_transport_nonmetal	2	no	no			
+Mavi_homi	WP_007170246.1	PbrR;ecZntR	no	NZ_CP036220.2	DUF2182 domain-containing prot|105bp|hypothetical_uncharacterized	DUF1490 family protein|121bp|hypothetical_uncharacterized	3	no	yes	copper-translocating P-type AT	copper-translocating P-type AT	473
+Mavi_homi	WP_007170252.1	BsCzrA;mtNmtR	no	NZ_CP036220.2	heavy metal translocating P-ty|53bp|metal_efflux_transport	arsM|88bp|metal_resistance_enzyme	2	yes	yes	arsM;heavy metal translocating P-ty	heavy metal translocating P-ty	53
+Mavi_homi	WP_007172204.1	TetR_SczA	no	NZ_CP036220.2	RND family transporter|804bp|generic_transport_nonmetal	RND family transporter|452bp|generic_transport_nonmetal	1	no	no			
+Mavi_homi	WP_008257349.1	PbrR;ecZntR	no	NZ_CP036220.2	DUF1490 family protein|278bp|hypothetical_uncharacterized	BlaI/MecI/CopY family transcri|5638bp|other_regulator	1	no	no		copper-translocating P-type AT	628
+Mavi_homi	WP_008257374.1	BsCzrA;mtNmtR	no	NZ_CP036220.2	ctpC|870bp|metal_efflux_transport	DUF1490 family protein|50bp|hypothetical_uncharacterized	2	no	yes	heavy metal translocating P-ty	heavy metal translocating P-ty	412
+Mavi_homi	WP_008257468.1	TetR_SczA	no	NZ_CP036220.2	carbon-nitrogen hydrolase fami|931bp|other	alpha/beta fold hydrolase|0bp|other	1	no	no			
+Mavi_homi	WP_008257501.1	CsoR_bsCsoR	yes	NZ_CP036220.2	PPE family protein%2C SVP subg|169bp|other	hypothetical protein|559bp|hypothetical_uncharacterized	1	no	no		heavy metal translocating P-ty	2792
+Mavi_homi	WP_009974218.1	MarR_AdcR	no	NZ_CP036220.2	SDR family oxidoreductase|58bp|other	amino acid ABC transporter ATP|66bp|generic_transport_nonmetal	2	no	no			
+Mavi_homi	WP_009975136.1	MarR_AdcR	no	NZ_CP036220.2	DUF2530 domain-containing prot|203bp|hypothetical_uncharacterized	TrmH family RNA methyltransfer|0bp|other	2	no	no			
+Mavi_homi	WP_009975678.1	Rrf2_ecIscR	no	NZ_CP036220.2	cysC|58bp|other	VOC family protein|0bp|other	3	no	no			
+Mavi_homi	WP_009977019.1	PbrR;ecZntR	no	NZ_CP036220.2	bifunctional nuclease family p|112bp|other	garA|0bp|other	2	no	no			
+Mavi_homi	WP_009978709.1	TetR_SczA	no	NZ_CP036220.2	TetR/AcrR family transcription|37bp|other_regulator	hypothetical protein|0bp|hypothetical_uncharacterized	2	no	no			
+Mavi_homi	WP_009979012.1	MarR_AdcR	no	NZ_CP036220.2	mmsB|75bp|other	pyridoxal phosphate-dependent |8bp|other	2	no	no			
+Mavi_homi	WP_010948879.1	TetR_SczA	no	NZ_CP036220.2	ipdF|71bp|other	fadA6|15bp|other	2	no	no			
+Mavi_homi	WP_011724184.1	BsCzrA;mtNmtR	no	NZ_CP036220.2	hypothetical protein|728bp|hypothetical_uncharacterized	recombinase family protein|0bp|other	2	yes	yes	ArsI/CadI family heavy metal r	ArsI/CadI family heavy metal r	97
+Mavi_homi	WP_011724231.1	GntR_LldR	yes	NZ_CP036220.2	acyl-CoA dehydrogenase family |6bp|other	hypothetical protein|74bp|hypothetical_uncharacterized	3	no	no			
+Mavi_homi	WP_011724270.1	PbrR;ecZntR	no	NZ_CP036220.2	aromatic ring-hydroxylating ox|40bp|other	DUF1906 domain-containing prot|60bp|hypothetical_uncharacterized	2	no	no			
+Mavi_homi	WP_011724342.1	TetR_SczA	no	NZ_CP036220.2	EVE domain-containing protein|159bp|other	VOC family protein|125bp|other	2	no	no			
+Mavi_homi	WP_011724552.1	ecFur;ecZur	yes	NZ_CP036220.2	hypothetical protein|78bp|hypothetical_uncharacterized	ArsR/SmtB family transcription|0bp|other	2	no	no			
+Mavi_homi	WP_011725103.1	CopY_saMecI	no	NZ_CP036220.2	PaaI family thioesterase|425bp|other	M56 family metallopeptidase|14bp|other	2	no	no		modA	4940
+Mavi_homi	WP_011725824.1	TetR_SczA	no	NZ_CP036220.2	hydroxymethylglutaryl-CoA lyas|14bp|other	acyl-CoA dehydrogenase family |10bp|other	2	no	no			
+Mavi_homi	WP_011726214.1	MarR_AdcR	no	NZ_CP036220.2	alpha/beta family hydrolase|46bp|other	LLM class F420-dependent oxido|16bp|other	2	no	no			
+Mavi_homi	WP_011726501.1	TetR_SczA	no	NZ_CP036220.2	ferredoxin reductase|97bp|other	hypothetical protein|35bp|hypothetical_uncharacterized	3	no	no			
+Mavi_homi	WP_014379994.1	BsCzrA;mtNmtR	no	NZ_CP036220.2	cation diffusion facilitator f|724bp|metal_efflux_transport	DUF1490 family protein|171bp|hypothetical_uncharacterized	1	no	no		heavy metal translocating P-ty	653
+Mavi_homi	WP_019732316.1	PbrR;ecZntR	no	NZ_CP036220.2	acyl-ACP desaturase|7543bp|other	flavin-containing monooxygenas|14bp|other	1	no	no			
+Mavi_homi	WP_019732662.1	GntR_LldR	no	NZ_CP036220.2	MmgE/PrpD family protein|82bp|other	ribokinase|0bp|other	2	no	no			
+Mavi_homi	WP_019733271.1	GntR_LldR	no	NZ_CP036220.2	hypothetical protein|84bp|hypothetical_uncharacterized	cupin domain-containing protei|121bp|other	2	no	no			
+Mavi_homi	WP_019733374.1	MarR_AdcR	no	NZ_CP036220.2	polysaccharide deacetylase fam|6bp|other	alpha/beta hydrolase family es|75bp|other	2	no	no		heavy metal translocating P-ty	2598
+Mavi_homi	WP_019733678.1	PbrR;ecZntR	no	NZ_CP036220.2	SMODS domain-containing nucleo|41bp|other	DUF732 domain-containing prote|271bp|hypothetical_uncharacterized	2	no	no		copper-translocating P-type AT	2900
+Mavi_homi	WP_023860833.1	GntR_LldR	no	NZ_CP036220.2	SDR family NAD(P)-dependent ox|1856bp|other	SMP-30/gluconolactonase/LRE fa|0bp|other	2	no	no			
+Mavi_homi	WP_023861029.1	MarR_AdcR	no	NZ_CP036220.2	flavin reductase family protei|66bp|other	metal-dependent hydrolase fami|12bp|other	2	no	no			
+Mavi_homi	WP_023861587.1	PbrR;ecZntR	no	NZ_CP036220.2	Hsp20/alpha crystallin family |60bp|other	Hsp20/alpha crystallin family |112bp|other	2	no	no			
+Mavi_homi	WP_033710793.1	GntR_LldR	no	NZ_CP036220.2	ABC transporter permease|795bp|generic_transport_nonmetal	MlaE family ABC transporter pe|0bp|generic_transport_nonmetal	3	no	no			
+Mavi_homi	WP_033712699.1	DtxR_bsMntR	yes	NZ_CP036220.2	sigB|129bp|other	DUF4192 domain-containing prot|44bp|hypothetical_uncharacterized	2	no	no			
+Mavi_homi	WP_033712913.1	CopY_saMecI	no	NZ_CP036220.2	heavy metal-responsive transcr|5638bp|metal_efflux_transport	cation transporter|3283bp|generic_transport_nonmetal	0	no	no		cation diffusion facilitator f	4007
+Mavi_homi	WP_033717296.1	TetR_SczA	no	NZ_CP036220.2	SDR family oxidoreductase|31bp|other	cytochrome P450|116bp|other	2	no	no			
+Mavi_homi	WP_033718214.1	GntR_LldR	no	NZ_CP036220.2	ABC transporter substrate-bind|252bp|generic_transport_nonmetal	4Fe-4S dicluster domain-contai|0bp|other	3	no	no			
+Mavi_homi	WP_033719851.1	ecFur;ecZur	yes	NZ_CP036220.2	L%2CD-transpeptidase|93bp|other	katG|36bp|other	2	no	no			
+Mavi_homi	WP_033720046.1	PbrR;ecZntR	yes	NZ_CP036220.2	fadD11|21bp|other	PPOX class F420-dependent oxid|58bp|other	2	no	no			
+Mavi_homi	WP_033720368.1	GntR_LldR	no	NZ_CP036220.2	NAD-dependent deacylase|37bp|other	DUF1697 domain-containing prot|51bp|hypothetical_uncharacterized	2	no	no			
+Mavi_homi	WP_033720902.1	GntR_LldR	yes	NZ_CP036220.2	sensor histidine kinase|96bp|other	thiolase family protein|8bp|other	2	no	no			
+Mavi_homi	WP_057969459.1	TetR_SczA	no	NZ_CP036220.2	metal-dependent hydrolase|76bp|other	TetR/AcrR family transcription|26bp|other_regulator	2	no	no			
+Mavi_homi	WP_095785912.1	GntR_LldR	NA	NZ_CP036220.2	hypothetical protein|7bp|hypothetical_uncharacterized	pyridoxamine 5'-phosphate oxid|29bp|other	3	no	no			
+Mavi_homi	WP_132160229.1	BsCzrA;mtNmtR	no	NZ_CP036220.2	hypothetical protein|71bp|hypothetical_uncharacterized	DUF1490 family protein|81bp|hypothetical_uncharacterized	3	no	yes	heavy metal translocating P-ty	heavy metal translocating P-ty	477
+Mavi_homi	WP_132160431.1	TetR_SczA	no	NZ_CP036220.2	D-2-hydroxyacid dehydrogenase |6bp|other	SDR family NAD(P)-dependent ox|0bp|other	2	no	no			
+MtubH37Rv	NP_214556.1	MarR_AdcR	no	NC_000962.3	leuS|109bp|other	HTH-type transcriptional regul|158bp|other_regulator	2	no	no			
+MtubH37Rv	NP_214557.1	GntR_LldR	no	NC_000962.3	transcriptional regulator|158bp|other_regulator	oxidoreductase|132bp|other	2	no	no			
+MtubH37Rv	NP_214595.1	BsCzrA;mtNmtR	no	NC_000962.3	hypothetical protein|94bp|hypothetical_uncharacterized	oxidoreductase|4bp|other	3	no	no			
+MtubH37Rv	NP_214704.1	CsoR_bsCsoR	yes	NC_000962.3	ilvD|147bp|other	MFS-type transporter|127bp|generic_transport_nonmetal	2	no	no		mymT	3319
+MtubH37Rv	NP_214816.1	TetR_SczA	no	NC_000962.3	vapC2|135bp|other	dehydrogenase/reductase|0bp|other	2	no	no			
+MtubH37Rv	NP_214838.1	BsCzrA;mtNmtR	no	NC_000962.3	hypothetical protein|100bp|hypothetical_uncharacterized	hypothetical protein|6bp|hypothetical_uncharacterized	3	no	no			
+MtubH37Rv	NP_214867.1	PbrR;ecZntR	no	NC_000962.3	grpE|1222bp|other	dnaJ1|0bp|other	2	no	no			
+MtubH37Rv	NP_215008.2	GntR_LldR	no	NC_000962.3	hypothetical protein|4bp|hypothetical_uncharacterized	hypothetical protein|0bp|hypothetical_uncharacterized	2	no	no			
+MtubH37Rv	NP_215090.1	BsCzrA;mtNmtR	no	NC_000962.3	oxidoreductase|102bp|other	TB27.3|13bp|hypothetical_uncharacterized	2	no	no			
+MtubH37Rv	NP_215100.1	GntR_LldR	no	NC_000962.3	integral membrane protein|137bp|other	yrbE2A|0bp|hypothetical_uncharacterized	2	no	no			
+MtubH37Rv	NP_215281.1	TetR_SczA	no	NC_000962.3	oxidoreductase|1204bp|other	cyp123|0bp|other	2	no	no			
+MtubH37Rv	NP_215307.1	GntR_LldR	no	NC_000962.3	hypothetical protein|1036bp|hypothetical_uncharacterized	hypothetical protein|0bp|hypothetical_uncharacterized	3	no	no			
+MtubH37Rv	NP_215342.1	BsCzrA;mtNmtR	yes	NC_000962.3	hypothetical protein|51bp|hypothetical_uncharacterized	deaminase|57bp|other	2	no	no			
+MtubH37Rv	NP_215482.1	CsoR_bsCsoR	yes	NC_000962.3	hypothetical protein|139bp|hypothetical_uncharacterized	hypothetical protein|56bp|hypothetical_uncharacterized	3	no	yes	ctpV	ctpV	408
+MtubH37Rv	NP_215535.1	TetR_SczA	no	NC_000962.3	glmU|254bp|other	mfd|58bp|other	2	no	no			
+MtubH37Rv	NP_215668.1	GntR_LldR	no	NC_000962.3	NAD-dependent protein deacylas|37bp|other	omt|0bp|other	2	no	no			
+MtubH37Rv	NP_215803.1	Rrf2_ecIscR	no	NC_000962.3	adenylyl-sulfate kinase|53bp|other	hypothetical protein|57bp|hypothetical_uncharacterized	2	no	no			
+MtubH37Rv	NP_215920.1	MarR_AdcR	no	NC_000962.3	methyltransferase|168bp|other	methyltransferase|71bp|other	2	no	no			
+MtubH37Rv	NP_216190.1	BsCzrA;mtNmtR	no	NC_000962.3	hypothetical protein|27bp|hypothetical_uncharacterized	cmr|324bp|other_regulator	2	no	no			
+MtubH37Rv	NP_216282.2	CsoR_bsCsoR	no	NC_000962.3	hypothetical protein|1221bp|hypothetical_uncharacterized	hypothetical protein|67bp|hypothetical_uncharacterized	1	no	no			
+MtubH37Rv	NP_216344.1	PbrR;ecZntR	no	NC_000962.3	gcvH|724bp|other	garA|0bp|other	2	no	no			
+MtubH37Rv	NP_216362.1	CopY_saMecI	no	NC_000962.3	blaR|14bp|other	esterase|277bp|other	2	no	no			
+MtubH37Rv	NP_216425.2	ecFur;ecZur	yes	NC_000962.3	katG|37bp|other	hypothetical protein|113bp|hypothetical_uncharacterized	2	no	no			
+MtubH37Rv	NP_216510.1	BsCzrA;mtNmtR	no	NC_000962.3	hypothetical protein|52bp|hypothetical_uncharacterized	hypothetical protein|156bp|hypothetical_uncharacterized	3	no	yes	ctpG	ctpG	321
+MtubH37Rv	NP_216550.1	BsCzrA;mtNmtR	no	NC_000962.3	hypothetical protein|211bp|hypothetical_uncharacterized	hypothetical protein|0bp|hypothetical_uncharacterized	3	no	no			
+MtubH37Rv	NP_216874.1	BsCzrA;mtNmtR	yes	NC_000962.3	glyS|181bp|other	zur|0bp|other	3	no	no			
+MtubH37Rv	NP_216875.1	ecFur;ecZur	yes	NC_000962.3	glyS|585bp|other	smtB|0bp|other_regulator	2	no	no			
+MtubH37Rv	NP_217156.1	BsCzrA;mtNmtR	no	NC_000962.3	integral membrane protein|119bp|other	cadI|101bp|metal_efflux_transport	2	yes	yes	cadI	cadI	101
+MtubH37Rv	NP_217158.1	BsCzrA;mtNmtR	no	NC_000962.3	cadI|135bp|metal_efflux_transport	arsC|0bp|metal_resistance_enzyme	2	yes	yes	arsC;cadI	arsC	0
+MtubH37Rv	NP_217227.1	DtxR_bsMntR	yes	NC_000962.3	sigB|132bp|other	hypothetical protein|12bp|hypothetical_uncharacterized	2	no	no			
+MtubH37Rv	NP_217304.1	DtxR_bsMntR	yes	NC_000962.3	hypothetical protein|84bp|hypothetical_uncharacterized	fadE21|60bp|other	2	no	no			
+MtubH37Rv	NP_217574.1	TetR_SczA	no	NC_000962.3	short chain alcohol dehydrogen|63bp|other	cyp136|115bp|other	2	no	no			
+MtubH37Rv	NP_217576.1	GntR_LldR	yes	NC_000962.3	cyp136|770bp|other	fadE22|48bp|other	1	no	no			
+MtubH37Rv	NP_217676.1	TetR_SczA	no	NC_000962.3	PPE53|174bp|other	dioxygenase|10bp|other	2	no	no			
+MtubH37Rv	NP_217851.1	PbrR;ecZntR	no	NC_000962.3	hypothetical protein|474bp|hypothetical_uncharacterized	integral membrane protein|33bp|other	2	no	no			
+MtubH37Rv	NP_218074.1	TetR_SczA	no	NC_000962.3	fadA6|64bp|other	PPE64|348bp|other	2	no	no			
+MtubH37Rv	NP_218261.1	BsCzrA;mtNmtR	yes	NC_000962.3	ctpJ|66bp|metal_efflux_transport	hypothetical protein|83bp|hypothetical_uncharacterized	3	yes	yes	ctpJ	ctpJ	66
+VchoRFB16	WP_000098098.1	MarR_AdcR	no	NZ_CP043556.1	fumarylacetoacetate hydrolase |115bp|other	organic hydroperoxide resistan|111bp|other	2	no	no			
+VchoRFB16	WP_000226968.1	PbrR;ecZntR	no	NZ_CP043556.1	deoD|1264bp|other	YbgA family protein|0bp|other	2	no	no		TonB-dependent hemoglobin/tran	6780
+VchoRFB16	WP_000234820.1	GntR_LldR	no	NZ_CP043554.1	nhaB|644bp|other	DUF1887 family protein|234bp|hypothetical_uncharacterized	1	no	no			
+VchoRFB16	WP_000245564.1	ecFur;ecZur	yes	NZ_CP043554.1	dusA|356bp|other	chemotaxis protein CheX|9bp|other	2	no	no			
+VchoRFB16	WP_000331318.1	GntR_LldR	no	NZ_CP043554.1	bifunctional metallophosphatas|483bp|other	aceE|49bp|other	2	no	no			
+VchoRFB16	WP_000410818.1	MarR_AdcR	no	NZ_CP043554.1	BCCT family transporter|374bp|generic_transport_nonmetal	response regulator transcripti|1bp|other	2	no	no			
+VchoRFB16	WP_000486335.1	PbrR;ecZntR	yes	NZ_CP043554.1	cadC|226bp|other_regulator	hypothetical protein|33bp|hypothetical_uncharacterized	3	no	no			
+VchoRFB16	WP_000842742.1	GntR_LldR	yes	NZ_CP043554.1	prpB|10bp|other	tripartite tricarboxylate tran|632bp|generic_transport_nonmetal	1	no	no			
+VchoRFB16	WP_000887845.1	MarR_AdcR	no	NZ_CP043554.1	vcrM|42bp|generic_transport_nonmetal	nlpI|98bp|other	2	no	no			
+VchoRFB16	WP_000936745.1	BsCzrA;mtNmtR	no	NZ_CP043554.1	ArsJ-associated glyceraldehyde|96bp|other	GGDEF domain-containing protei|541bp|other	1	no	no		arsJ	1653
+VchoRFB16	WP_001027397.1	PbrR;ecZntR	yes	NZ_CP043554.1	NfeD family protein|25bp|other	OprD family porin|228bp|other	3	no	no			
+VchoRFB16	WP_001053149.1	BsCzrA;mtNmtR	no	NZ_CP043554.1	rpsT|67bp|other	nhaR|222bp|other_regulator	2	no	no			
+VchoRFB16	WP_001114934.1	BsCzrA;mtNmtR	no	NZ_CP043556.1	YeeE/YedE family protein|55bp|other	YgaP family membrane protein|154bp|other	4	no	no			
+VchoRFB16	WP_001200476.1	GntR_LldR	no	NZ_CP043556.1	DMT family transporter|65bp|generic_transport_nonmetal	putative 2-aminoethylphosphona|24bp|generic_transport_nonmetal	2	no	no			
+VchoRFB16	WP_001282826.1	ecFur;ecZur	yes	NZ_CP043554.1	aspartate-semialdehyde dehydro|82bp|other	DUF4442 domain-containing prot|365bp|hypothetical_uncharacterized	2	no	no			
+VchoRFB16	WP_001918301.1	Rrf2_ecIscR	yes	NZ_CP043554.1	IscS subfamily cysteine desulf|26bp|other	trmJ|114bp|other	2	no	no			
+VchoRFB16	WP_032469534.1	MarR_AdcR	no	NZ_CP043556.1	EamA family transporter|148bp|generic_transport_nonmetal	rhodanese-like domain-containi|72bp|other	2	no	no			
+VchoRFB16	WP_033928387.1	GntR_LldR	no	NZ_CP043554.1	DUF3187 family protein|115bp|hypothetical_uncharacterized	hutI|103bp|other	2	no	no			
+VchoRFB16	WP_149560760.1	PbrR;ecZntR	yes	NZ_CP043556.1	multidrug effflux MFS transpor|41bp|generic_transport_nonmetal	MFS transporter|178bp|generic_transport_nonmetal	2	no	no			
+VvulNBRC	WP_011078600.1	BsCzrA;mtNmtR	no	NZ_CP012881.1	rpsT|124bp|other	nhaR|128bp|other_regulator	2	no	no			
+VvulNBRC	WP_011079257.1	TetR_SczA	no	NZ_CP012881.1	VanZ family protein|122bp|other	acetyltransferase|133bp|other	3	no	no			
+VvulNBRC	WP_011079554.1	GntR_LldR	no	NZ_CP012881.1	ampD|388bp|other	aceE|53bp|other	2	no	no			
+VvulNBRC	WP_011080105.1	GntR_LldR	no	NZ_CP012881.1	nhaB|640bp|other	ribA|213bp|other	1	no	no			
+VvulNBRC	WP_011081967.1	GntR_LldR	yes	NZ_CP012882.1	TRAP transporter substrate-bin|107bp|generic_transport_nonmetal	uxuA|129bp|other	2	no	no			
+VvulNBRC	WP_011151269.1	ecFur;ecZur	yes	NZ_CP012881.1	chemotaxis protein CheX|25bp|other	dusA|293bp|other	2	no	no			
+VvulNBRC	WP_011151851.1	GntR_LldR	no	NZ_CP012882.1	DMT family transporter|119bp|generic_transport_nonmetal	putative 2-aminoethylphosphona|9bp|generic_transport_nonmetal	2	no	no			
+VvulNBRC	WP_013572351.1	Rrf2_ecIscR	yes	NZ_CP012881.1	IscS subfamily cysteine desulf|30bp|other	trmJ|117bp|other	2	no	no			
+VvulNBRC	WP_015728056.1	PbrR;ecZntR	no	NZ_CP012882.1	isovaleryl-CoA dehydrogenase|65bp|other	thiolase family protein|194bp|other	2	no	no			
+VvulNBRC	WP_017419581.1	MarR_AdcR	yes	NZ_CP012882.1	DEAD/DEAH box helicase|1107bp|other	VOC family protein|0bp|other	2	yes	yes	dmeF	dmeF	0
+VvulNBRC	WP_017419586.1	TetR_SczA	no	NZ_CP012882.1	MBL fold metallo-hydrolase|192bp|other	Gfo/Idh/MocA family protein|81bp|other	2	no	no		dmeF	2537
+VvulNBRC	WP_017419776.1	PbrR;ecZntR	yes	NZ_CP012881.1	purH|270bp|other	methyl-accepting chemotaxis pr|59bp|other	2	no	no			
+VvulNBRC	WP_017419796.1	MarR_AdcR	no	NZ_CP012881.1	nlpI|180bp|other	MATE family efflux transporter|30bp|generic_transport_nonmetal	2	no	no			
+VvulNBRC	WP_017420393.1	BsCzrA;mtNmtR	no	NZ_CP012881.1	EAL and HDOD domain-containing|106bp|other	ArsJ-associated glyceraldehyde|29bp|other	2	no	no		arsJ	1607
+VvulNBRC	WP_017420471.1	PbrR;ecZntR	no	NZ_CP012881.1	YicC/YloC family endoribonucle|569bp|other	YecA family protein|197bp|other	1	no	no			
+VvulNBRC	WP_017421059.1	GntR_LldR	no	NZ_CP012881.1	hutI|120bp|other	sporulation protein|193bp|other	2	no	no			
+VvulNBRC	WP_017421405.1	MarR_AdcR	no	NZ_CP012882.1	hypothetical protein|84bp|hypothetical_uncharacterized	cytochrome b/b6 domain-contain|0bp|other	2	no	no			
+VvulNBRC	WP_017421487.1	PbrR;ecZntR	yes	NZ_CP012882.1	MFS transporter|110bp|generic_transport_nonmetal	cryptochrome/photolyase family|0bp|other	2	no	no			
+VvulNBRC	WP_017421861.1	GntR_LldR	no	NZ_CP012882.1	DMT family transporter|87bp|generic_transport_nonmetal	PKD domain-containing protein|124bp|other	2	no	no			
+VvulNBRC	WP_017421885.1	TetR_SczA	no	NZ_CP012882.1	phosphatase PAP2 family protei|332bp|other	hypothetical protein|384bp|hypothetical_uncharacterized	2	no	no			
+VvulNBRC	WP_017422153.1	GntR_LldR	yes	NZ_CP012881.1	prpB|12bp|other	tripartite tricarboxylate tran|348bp|generic_transport_nonmetal	2	no	no			
+VvulNBRC	WP_017422374.1	PbrR;ecZntR	no	NZ_CP012882.1	phrB|8bp|other	YbgA family protein|0bp|other	2	no	no		TonB-dependent hemoglobin/tran	6618
+VvulNBRC	WP_017422578.1	PbrR;ecZntR	yes	NZ_CP012882.1	YgjV family protein|185bp|other	vctC|50bp|iron_siderophore	2	yes	yes	vctC	vctC	50
+VvulNBRC	WP_026050216.1	MarR_AdcR	no	NZ_CP012882.1	ohr|114bp|other	fumarylacetoacetate hydrolase |102bp|other	2	no	no			
+VvulNBRC	WP_026050458.1	ecFur;ecZur	yes	NZ_CP012881.1	DUF4442 domain-containing prot|195bp|hypothetical_uncharacterized	glnS|105bp|other	2	no	no			
+VvulNBRC	WP_026050517.1	GntR_LldR	no	NZ_CP012882.1	TonB-dependent receptor|340bp|iron_siderophore	fhuB|168bp|iron_siderophore	2	yes	yes	TonB-dependent receptor;fhuB	fhuB	168
+VvulNBRC	WP_026050839.1	MarR_AdcR	no	NZ_CP012882.1	DMT family transporter|110bp|generic_transport_nonmetal	DUF3069 domain-containing prot|36bp|hypothetical_uncharacterized	2	no	no		modC	1036
+VvulNBRC	WP_038939556.1	Rrf2_ecIscR	yes	NZ_CP012881.1	hmpA|130bp|other	amidohydrolase|63bp|other	2	no	no			
+VvulNBRC	WP_038941075.1	BsCzrA;mtNmtR	no	NZ_CP012882.1	YgaP family membrane protein|152bp|other	YeeE/YedE family protein|15bp|other	4	no	no			
+VvulNBRC	WP_049798003.1	GntR_LldR	no	NZ_CP012882.1	pyridoxamine 5'-phosphate oxid|122bp|other	class II glutamine amidotransf|12bp|other	2	no	no			

@@ -1,0 +1,8 @@
+# Core analysis scripts use only the Python standard library (>=3.8).
+# The lines below are OPTIONAL helpers (only if you want to rasterise SVG
+# figures or extend the analysis); none are required to run the pipeline.
+#
+# cairosvg      # SVG -> PNG/PDF rendering
+# pandas        # if you prefer dataframes over the built-in TSV parsing
+#
+# External (NOT pip) tools used by workflow/: MetalNet2, ColabFold or HHblits, HMMER, BITACORA.

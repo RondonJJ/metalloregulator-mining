@@ -1,0 +1,151 @@
+genome	accession	families	n_families	has_metalnet_site	site_residues	composition	max_prob	n_neighbor_genes_500bp	metal_gene_within_200bp	metal_gene_within_500bp	metal_neighbor	effective_200bp	effective_500bp
+Mavi_homi	WP_003872558.1	LysR_ModE	1	no	-	-	-	2	no	no		no	no
+Mavi_homi	WP_003873121.1	GntR_LldR	1	yes	E118,H164,H217,H239	3H,1E	0.953	2	no	no		no	no
+Mavi_homi	WP_003873870.1	PbrR;ecZntR	2	no	-	-	-	2	no	no		no	no
+Mavi_homi	WP_003874019.1	TetR_SczA	1	NA	-	-	-	2	no	no		NA	NA
+Mavi_homi	WP_003874104.1	CsoR_bsCsoR	1	yes	C38,H63,C67	2C,1H	0.879	2	no	no		no	no
+Mavi_homi	WP_003874151.1	GntR_LldR	1	yes	H134,E175,H176,H198	3H,1E	0.961	2	no	no		no	no
+Mavi_homi	WP_003874166.1	GntR_LldR	1	yes	E140,H144,H186	2H,1E	0.895	3	no	no		no	no
+Mavi_homi	WP_003874235.1	CsoR_bsCsoR	1	no	-	-	-	3	no	no		no	no
+Mavi_homi	WP_003874323.1	TetR_SczA	1	no	-	-	-	2	no	no		no	no
+Mavi_homi	WP_003874674.1	PbrR;ecZntR	2	NA	-	-	-	2	no	no		NA	NA
+Mavi_homi	WP_003875160.1	DtxR_bsMntR	1	yes	H90,E94,H109,E113,E116,H117,D137,H139,D141	4H,3E,2D	0.962	2	no	no		no	no
+Mavi_homi	WP_003875762.1	TetR_SczA	1	no	-	-	-	2	no	no		no	no
+Mavi_homi	WP_003875976.1	PbrR;ecZntR	2	no	-	-	-	2	no	no		no	no
+Mavi_homi	WP_003877217.1	BsCzrA;mtNmtR	2	yes	H88,D95	1H,1D	0.811	3	no	no		no	no
+Mavi_homi	WP_003877537.1	TetR_SczA	1	no	-	-	-	2	no	no		no	no
+Mavi_homi	WP_003877960.1	BsCzrA;mtNmtR	2	no	-	-	-	3	no	no		no	no
+Mavi_homi	WP_003878320.1	BsCzrA;mtNmtR	2	yes	H108,H111,D115,H119,E122	3H,1E,1D	0.852	3	no	no		no	no
+Mavi_homi	WP_003879062.1	LysR_ModE	1	no	-	-	-	2	no	no		no	no
+Mavi_homi	WP_003879269.1	TetR_SczA	1	no	-	-	-	2	no	no		no	no
+Mavi_homi	WP_007170246.1	PbrR;ecZntR	2	no	-	-	-	3	no	yes	copper-translocating P-type AT	no	no
+Mavi_homi	WP_007170252.1	BsCzrA;mtNmtR	2	no	-	-	-	2	yes	yes	arsM;heavy metal translocating P-ty	no	no
+Mavi_homi	WP_007172204.1	TetR_SczA	1	no	-	-	-	1	no	no		no	no
+Mavi_homi	WP_008257349.1	PbrR;ecZntR	2	no	-	-	-	1	no	no		no	no
+Mavi_homi	WP_008257374.1	BsCzrA;mtNmtR	2	no	-	-	-	2	no	yes	heavy metal translocating P-ty	no	no
+Mavi_homi	WP_008257468.1	TetR_SczA	1	no	-	-	-	1	no	no		no	no
+Mavi_homi	WP_008257501.1	CsoR_bsCsoR	1	yes	C38,H63,C67	2C,1H	0.849	1	no	no		no	no
+Mavi_homi	WP_009974218.1	MarR_AdcR	1	no	-	-	-	2	no	no		no	no
+Mavi_homi	WP_009975136.1	MarR_AdcR	1	no	-	-	-	2	no	no		no	no
+Mavi_homi	WP_009975678.1	Rrf2_ecIscR	1	no	-	-	-	3	no	no		no	no
+Mavi_homi	WP_009977019.1	PbrR;ecZntR	2	no	-	-	-	2	no	no		no	no
+Mavi_homi	WP_009978709.1	TetR_SczA	1	no	-	-	-	2	no	no		no	no
+Mavi_homi	WP_009979012.1	MarR_AdcR	1	no	-	-	-	2	no	no		no	no
+Mavi_homi	WP_010948879.1	TetR_SczA	1	no	-	-	-	2	no	no		no	no
+Mavi_homi	WP_011724184.1	BsCzrA;mtNmtR	2	no	-	-	-	2	yes	yes	ArsI/CadI family heavy metal r	no	no
+Mavi_homi	WP_011724231.1	GntR_LldR	1	yes	H139,H181,H203	3H	0.965	3	no	no		no	no
+Mavi_homi	WP_011724270.1	PbrR;ecZntR	2	no	-	-	-	2	no	no		no	no
+Mavi_homi	WP_011724342.1	TetR_SczA	1	no	-	-	-	2	no	no		no	no
+Mavi_homi	WP_011724552.1	ecFur;ecZur	2	yes	H85,H87,C91,C94,H123,C131,C134	4C,3H	0.991	2	no	no		no	no
+Mavi_homi	WP_011725103.1	CopY_saMecI	1	no	-	-	-	2	no	no		no	no
+Mavi_homi	WP_011725824.1	TetR_SczA	1	no	-	-	-	2	no	no		no	no
+Mavi_homi	WP_011726214.1	MarR_AdcR	1	no	-	-	-	2	no	no		no	no
+Mavi_homi	WP_011726501.1	TetR_SczA	1	no	-	-	-	3	no	no		no	no
+Mavi_homi	WP_014379994.1	BsCzrA;mtNmtR	2	no	-	-	-	1	no	no		no	no
+Mavi_homi	WP_019732316.1	PbrR;ecZntR	2	no	-	-	-	1	no	no		no	no
+Mavi_homi	WP_019732662.1	GntR_LldR	1	no	-	-	-	2	no	no		no	no
+Mavi_homi	WP_019733271.1	GntR_LldR	1	no	-	-	-	2	no	no		no	no
+Mavi_homi	WP_019733374.1	MarR_AdcR	1	no	-	-	-	2	no	no		no	no
+Mavi_homi	WP_019733678.1	PbrR;ecZntR	2	no	-	-	-	2	no	no		no	no
+Mavi_homi	WP_023860833.1	GntR_LldR	1	no	-	-	-	2	no	no		no	no
+Mavi_homi	WP_023861029.1	MarR_AdcR	1	no	-	-	-	2	no	no		no	no
+Mavi_homi	WP_023861587.1	PbrR;ecZntR	2	no	-	-	-	2	no	no		no	no
+Mavi_homi	WP_033710793.1	GntR_LldR	1	no	-	-	-	3	no	no		no	no
+Mavi_homi	WP_033712699.1	DtxR_bsMntR	1	yes	H79,E83,H98,C102,E105	1C,2H,2E	0.975	2	no	no		no	no
+Mavi_homi	WP_033712913.1	CopY_saMecI	1	no	-	-	-	0	no	no		no	no
+Mavi_homi	WP_033717296.1	TetR_SczA	1	no	-	-	-	2	no	no		no	no
+Mavi_homi	WP_033718214.1	GntR_LldR	1	no	-	-	-	3	no	no		no	no
+Mavi_homi	WP_033719851.1	ecFur;ecZur	2	yes	E82,H89,H90,H91,C94,C97,D102,C105,C112,C138,C141	6C,3H,1E,1D	0.995	2	no	no		no	no
+Mavi_homi	WP_033720046.1	PbrR;ecZntR	2	yes	C108,C110,C116	3C	0.898	2	no	no		no	no
+Mavi_homi	WP_033720368.1	GntR_LldR	1	no	-	-	-	2	no	no		no	no
+Mavi_homi	WP_033720902.1	GntR_LldR	1	yes	E112,H153,H202,H224,H407,H454,H476	6H,1E	0.942	2	no	no		no	no
+Mavi_homi	WP_057969459.1	TetR_SczA	1	no	-	-	-	2	no	no		no	no
+Mavi_homi	WP_095785912.1	GntR_LldR	1	NA	-	-	-	3	no	no		NA	NA
+Mavi_homi	WP_132160229.1	BsCzrA;mtNmtR	2	no	-	-	-	3	no	yes	heavy metal translocating P-ty	no	no
+Mavi_homi	WP_132160431.1	TetR_SczA	1	no	-	-	-	2	no	no		no	no
+MtubH37Rv	NP_214556.1	MarR_AdcR	1	no	-	-	-	2	no	no		no	no
+MtubH37Rv	NP_214557.1	GntR_LldR	1	no	-	-	-	2	no	no		no	no
+MtubH37Rv	NP_214595.1	BsCzrA;mtNmtR	2	no	-	-	-	3	no	no		no	no
+MtubH37Rv	NP_214704.1	CsoR_bsCsoR	1	yes	C38,H63,C67	2C,1H	0.883	2	no	no		no	no
+MtubH37Rv	NP_214816.1	TetR_SczA	1	no	-	-	-	2	no	no		no	no
+MtubH37Rv	NP_214838.1	BsCzrA;mtNmtR	2	no	-	-	-	3	no	no		no	no
+MtubH37Rv	NP_214867.1	PbrR;ecZntR	2	no	-	-	-	2	no	no		no	no
+MtubH37Rv	NP_215008.2	GntR_LldR	1	no	-	-	-	2	no	no		no	no
+MtubH37Rv	NP_215090.1	BsCzrA;mtNmtR	2	no	-	-	-	2	no	no		no	no
+MtubH37Rv	NP_215100.1	GntR_LldR	1	no	-	-	-	2	no	no		no	no
+MtubH37Rv	NP_215281.1	TetR_SczA	1	no	-	-	-	2	no	no		no	no
+MtubH37Rv	NP_215307.1	GntR_LldR	1	no	-	-	-	3	no	no		no	no
+MtubH37Rv	NP_215342.1	BsCzrA;mtNmtR	2	yes	H88,D95	1H,1D	0.809	2	no	no		no	no
+MtubH37Rv	NP_215482.1	CsoR_bsCsoR	1	yes	C36,H61,C65	2C,1H	0.846	3	no	yes	ctpV	no	yes
+MtubH37Rv	NP_215535.1	TetR_SczA	1	no	-	-	-	2	no	no		no	no
+MtubH37Rv	NP_215668.1	GntR_LldR	1	no	-	-	-	2	no	no		no	no
+MtubH37Rv	NP_215803.1	Rrf2_ecIscR	1	no	-	-	-	2	no	no		no	no
+MtubH37Rv	NP_215920.1	MarR_AdcR	1	no	-	-	-	2	no	no		no	no
+MtubH37Rv	NP_216190.1	BsCzrA;mtNmtR	2	no	-	-	-	2	no	no		no	no
+MtubH37Rv	NP_216282.2	CsoR_bsCsoR	1	no	-	-	-	1	no	no		no	no
+MtubH37Rv	NP_216344.1	PbrR;ecZntR	2	no	-	-	-	2	no	no		no	no
+MtubH37Rv	NP_216362.1	CopY_saMecI	1	no	-	-	-	2	no	no		no	no
+MtubH37Rv	NP_216425.2	ecFur;ecZur	2	yes	E82,H89,H91,C94,C97,D102,C134,C137	4C,2H,1E,1D	0.992	2	no	no		no	no
+MtubH37Rv	NP_216510.1	BsCzrA;mtNmtR	2	no	-	-	-	3	no	yes	ctpG	no	no
+MtubH37Rv	NP_216550.1	BsCzrA;mtNmtR	2	no	-	-	-	3	no	no		no	no
+MtubH37Rv	NP_216874.1	BsCzrA;mtNmtR	2	yes	D116,H118,H121,H129,E132	3H,1E,1D	0.89	3	no	no		no	no
+MtubH37Rv	NP_216875.1	ecFur;ecZur	2	yes	H79,H80,H81,H82,C85,C88,E93,H117,C125,C128	4C,5H,1E	0.993	2	no	no		no	no
+MtubH37Rv	NP_217156.1	BsCzrA;mtNmtR	2	no	-	-	-	2	yes	yes	cadI	no	no
+MtubH37Rv	NP_217158.1	BsCzrA;mtNmtR	2	no	-	-	-	2	yes	yes	arsC;cadI	no	no
+MtubH37Rv	NP_217227.1	DtxR_bsMntR	1	yes	H79,E83,H98,C102,E105	1C,2H,2E	0.974	2	no	no		no	no
+MtubH37Rv	NP_217304.1	DtxR_bsMntR	1	yes	H86,E90,H105,E109,E112,D133,H135,D137	3H,3E,2D	0.966	2	no	no		no	no
+MtubH37Rv	NP_217574.1	TetR_SczA	1	no	-	-	-	2	no	no		no	no
+MtubH37Rv	NP_217576.1	GntR_LldR	1	yes	E408,H412,H459,H481	3H,1E	0.89	1	no	no		no	no
+MtubH37Rv	NP_217676.1	TetR_SczA	1	no	-	-	-	2	no	no		no	no
+MtubH37Rv	NP_217851.1	PbrR;ecZntR	2	no	-	-	-	2	no	no		no	no
+MtubH37Rv	NP_218074.1	TetR_SczA	1	no	-	-	-	2	no	no		no	no
+MtubH37Rv	NP_218261.1	BsCzrA;mtNmtR	2	yes	D91,H93,E100,H104,H107	3H,1E,1D	0.932	3	yes	yes	ctpJ	yes	yes
+VchoRFB16	WP_000098098.1	MarR_AdcR	1	no	-	-	-	2	no	no		no	no
+VchoRFB16	WP_000226968.1	PbrR;ecZntR	2	no	-	-	-	2	no	no		no	no
+VchoRFB16	WP_000234820.1	GntR_LldR	1	no	-	-	-	1	no	no		no	no
+VchoRFB16	WP_000245564.1	ecFur;ecZur	2	yes	C103,C106,C143,C146	4C	0.995	2	no	no		no	no
+VchoRFB16	WP_000331318.1	GntR_LldR	1	no	-	-	-	2	no	no		no	no
+VchoRFB16	WP_000410818.1	MarR_AdcR	1	no	-	-	-	2	no	no		no	no
+VchoRFB16	WP_000486335.1	PbrR;ecZntR	2	yes	C79,C125	2C	0.878	3	no	no		no	no
+VchoRFB16	WP_000842742.1	GntR_LldR	1	yes	D143,H147,H192,H214	3H,1D	0.978	1	no	no		no	no
+VchoRFB16	WP_000887845.1	MarR_AdcR	1	no	-	-	-	2	no	no		no	no
+VchoRFB16	WP_000936745.1	BsCzrA;mtNmtR	2	no	-	-	-	1	no	no		no	no
+VchoRFB16	WP_001027397.1	PbrR;ecZntR	2	yes	C112,C120	2C	0.928	3	no	no		no	no
+VchoRFB16	WP_001053149.1	BsCzrA;mtNmtR	2	no	-	-	-	2	no	no		no	no
+VchoRFB16	WP_001114934.1	BsCzrA;mtNmtR	2	no	-	-	-	4	no	no		no	no
+VchoRFB16	WP_001200476.1	GntR_LldR	1	no	-	-	-	2	no	no		no	no
+VchoRFB16	WP_001282826.1	ecFur;ecZur	2	yes	E81,H87,H88,D89,H90,C93,C96,E101,E108,H125,C133,D136	3C,4H,3E,2D	0.966	2	no	no		no	no
+VchoRFB16	WP_001918301.1	Rrf2_ecIscR	1	yes	C92,C98,C104,H107	3C,1H	0.907	2	no	no		no	no
+VchoRFB16	WP_032469534.1	MarR_AdcR	1	no	-	-	-	2	no	no		no	no
+VchoRFB16	WP_033928387.1	GntR_LldR	1	no	-	-	-	2	no	no		no	no
+VchoRFB16	WP_149560760.1	PbrR;ecZntR	2	yes	C110,C113,C115,C121	4C	0.972	2	no	no		no	no
+VvulNBRC	WP_011078600.1	BsCzrA;mtNmtR	2	no	-	-	-	2	no	no		no	no
+VvulNBRC	WP_011079257.1	TetR_SczA	1	no	-	-	-	3	no	no		no	no
+VvulNBRC	WP_011079554.1	GntR_LldR	1	no	-	-	-	2	no	no		no	no
+VvulNBRC	WP_011080105.1	GntR_LldR	1	no	-	-	-	1	no	no		no	no
+VvulNBRC	WP_011081967.1	GntR_LldR	1	yes	E111,D151,H155,H204,H226	3H,1E,1D	0.973	2	no	no		no	no
+VvulNBRC	WP_011151269.1	ecFur;ecZur	2	yes	C103,C106,C143,C146	4C	0.994	2	no	no		no	no
+VvulNBRC	WP_011151851.1	GntR_LldR	1	no	-	-	-	2	no	no		no	no
+VvulNBRC	WP_013572351.1	Rrf2_ecIscR	1	yes	C92,C98,C104,H107	3C,1H	0.914	2	no	no		no	no
+VvulNBRC	WP_015728056.1	PbrR;ecZntR	2	no	-	-	-	2	no	no		no	no
+VvulNBRC	WP_017419581.1	MarR_AdcR	1	yes	E22,E40,H104,H108	2H,2E	0.9	2	yes	yes	dmeF	yes	yes
+VvulNBRC	WP_017419586.1	TetR_SczA	1	no	-	-	-	2	no	no		no	no
+VvulNBRC	WP_017419776.1	PbrR;ecZntR	2	yes	C79,C114,C125	3C	0.869	2	no	no		no	no
+VvulNBRC	WP_017419796.1	MarR_AdcR	1	no	-	-	-	2	no	no		no	no
+VvulNBRC	WP_017420393.1	BsCzrA;mtNmtR	2	no	-	-	-	2	no	no		no	no
+VvulNBRC	WP_017420471.1	PbrR;ecZntR	2	no	-	-	-	1	no	no		no	no
+VvulNBRC	WP_017421059.1	GntR_LldR	1	no	-	-	-	2	no	no		no	no
+VvulNBRC	WP_017421405.1	MarR_AdcR	1	no	-	-	-	2	no	no		no	no
+VvulNBRC	WP_017421487.1	PbrR;ecZntR	2	yes	C110,C113,C115,C121	4C	0.966	2	no	no		no	no
+VvulNBRC	WP_017421861.1	GntR_LldR	1	no	-	-	-	2	no	no		no	no
+VvulNBRC	WP_017421885.1	TetR_SczA	1	no	-	-	-	2	no	no		no	no
+VvulNBRC	WP_017422153.1	GntR_LldR	1	yes	E101,D145,H149,H194,H216	3H,1E,1D	0.981	2	no	no		no	no
+VvulNBRC	WP_017422374.1	PbrR;ecZntR	2	no	-	-	-	2	no	no		no	no
+VvulNBRC	WP_017422578.1	PbrR;ecZntR	2	yes	C112,C120	2C	0.921	2	yes	yes	vctC	yes	yes
+VvulNBRC	WP_026050216.1	MarR_AdcR	1	no	-	-	-	2	no	no		no	no
+VvulNBRC	WP_026050458.1	ecFur;ecZur	2	yes	E81,H87,H88,D89,H90,C93,C96,E101,E108,H125,C133	3C,4H,3E,1D	0.972	2	no	no		no	no
+VvulNBRC	WP_026050517.1	GntR_LldR	1	no	-	-	-	2	yes	yes	TonB-dependent receptor;fhuB	no	no
+VvulNBRC	WP_026050839.1	MarR_AdcR	1	no	-	-	-	2	no	no		no	no
+VvulNBRC	WP_038939556.1	Rrf2_ecIscR	1	yes	C91,C96,C102	3C	0.934	2	no	no		no	no
+VvulNBRC	WP_038941075.1	BsCzrA;mtNmtR	2	no	-	-	-	4	no	no		no	no
+VvulNBRC	WP_049798003.1	GntR_LldR	1	no	-	-	-	2	no	no		no	no

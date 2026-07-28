@@ -1,0 +1,26 @@
+# MetalNet / MSA intermediates (large; regenerate from workflow/)
+output/
+output_pilot/
+msa/
+esm2/
+seqs/
+*.a3m
+*.pt
+*.uni.a3m
+seq_list.txt
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# OS / editors
+.DS_Store
+*~
+.vscode/
+.idea/
+
+# Large raw inputs (add your own genome FASTAs/GFFs locally)
+*.fna
+*.gbff
+genomes/

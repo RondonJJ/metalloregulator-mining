@@ -1,24 +1,24 @@
-# =====================================================================
-# Configuracion del pipeline. Todo lo ajustable vive aqui (nada hardcodeado).
-# =====================================================================
+# Configuracion del pipeline. Valores tomados de tu runBITACORA.sh real (Mtub H37Rv).
 
 # ---- BITACORA ----
-# Carpeta de instalacion de BITACORA (contiene runBITACORA_genome_mode.sh y Tools/)
-bitacora_dir: "programas/BITACORA"
+bitacora_scriptdir: "/users-d2/j.rondon/arsR/SSNs_results_PAPER/bitacora_results/bitacora_SSN_Jun26/Scripts"
+query_db: "/users-d2/j.rondon/arsR/SSNs_results_PAPER/bitacora_results/bitacora_SSN_Jun26/databases"
+bitacora_gemomap: ""
 
-# Query Database: carpeta con un subdirectorio por familia, cada uno con su
-# <familia>.fasta y <familia>.hmm (perfiles HMM de la SSN + secuencias del cluster).
-query_db: "resources/query_db"
+bitacora_threads: 10
+bitacora_gemoma: "F"
+bitacora_maxintron: 0
+bitacora_genomicblastp: "F"
+bitacora_addfilter: "T"
+bitacora_filterlength: 60
+bitacora_retainnonfilter: "F"
+bitacora_clean: "T"
 
-# ---- Recoleccion de candidatos ----
-# Sufijo de los archivos de BITACORA que usas (proteinas completas mejor anotadas).
-# NO lo cambies salvo que BITACORA cambie sus nombres de salida.
 bitacora_keep_suffix: "_genomic_and_annotated_proteins_trimmed_idseqsclustered"
 
 # ---- MetalNet2 ----
-# Se usa TU entorno ya funcional por ruta absoluta (no se recrea desde un yaml).
 metalnet_python: "/users-d2/j.rondon/miniconda3/envs/metalnet/bin/python"
 metalnet_script: "/users-d2/j.rondon/programas/MetalNet2/model/scripts/run_prediction_workflow.py"
-metalnet_msa_source: "colabfold"   # requiere internet en el nodo
-metalnet_use_gpu: false            # true -> agrega --cuda 1 (acelera ESM2)
+metalnet_msa_source: "colabfold"
+metalnet_use_gpu: false
 metalnet_threads: 4

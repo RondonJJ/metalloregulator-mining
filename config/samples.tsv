@@ -1,0 +1,2 @@
+sample	genome_fasta	genome_gff	proteins_fasta	evalue
+MtubH37Rv	resources/genomes/MtubH37Rv.fasta	resources/genomes/MtubH37Rv.gff3	resources/genomes/MtubH37Rv.faa	1e-5

@@ -1,0 +1,131 @@
+# =====================================================================
+# Pipeline: mineria de metalorreguladores (BITACORA -> MetalNet2 -> analisis)
+#
+# Correr LOCAL (sin cola):     snakemake --use-conda --cores 4
+# Correr en tu server SGE:     snakemake --use-conda --profile workflow/profiles/sge
+# Ver el DAG:                  snakemake --dag | dot -Tpng > dag.png
+# Reporte para publicar:       snakemake --report report.html
+# =====================================================================
+
+import pandas as pd
+from pathlib import Path
+
+configfile: "config/config.yaml"
+
+samples = pd.read_table("config/samples.tsv").set_index("sample", drop=False)
+SAMPLES = samples["sample"].tolist()
+
+
+# ---------- Objetivo final ----------
+rule all:
+    input:
+        "results/tables/metalnet_sites_annotated.tsv",
+        "results/figures/sites_per_family.png",
+
+
+# ---------- Etapa 1: BITACORA (genome mode), una corrida por muestra ----------
+# BITACORA se configura editando las variables del inicio del script maestro.
+# Copia runBITACORA_genome_mode.sh a un lugar escribible y ajusta sus variables,
+# o adapta el comando de abajo. La salida DEBE quedar dentro de output.outdir.
+rule bitacora:
+    input:
+        genome   = lambda wc: samples.loc[wc.sample, "genome_fasta"],
+        gff      = lambda wc: samples.loc[wc.sample, "genome_gff"],
+        proteins = lambda wc: samples.loc[wc.sample, "proteins_fasta"],
+        query_db = config["query_db"],
+    output:
+        outdir = directory("results/bitacora/{sample}"),
+    params:
+        bitacora = config["bitacora_dir"],
+        evalue   = lambda wc: samples.loc[wc.sample, "evalue"],
+    conda:
+        "envs/bitacora.yaml"
+    log:
+        "logs/bitacora/{sample}.log"
+    shell:
+        r"""
+        mkdir -p {output.outdir}
+
+        # >>> EDITAR (1/3): invocacion real de BITACORA en genome mode <<<
+        # Tipicamente se editan las variables NAME/GENOME/GFF/PROTFILE/QUERYDIR/
+        # BITACORA/EVALUE/THREADS al inicio del script maestro. Asegurate de que
+        # todas las salidas caigan dentro de {output.outdir}.
+        bash {params.bitacora}/runBITACORA_genome_mode.sh \
+            2>&1 | tee {log}
+        """
+
+
+# ---------- Etapa 2: recolectar candidatos para MetalNet2 ----------
+# Junta todos los *_idseqsclustered.fasta (todas las familias, todas las muestras)
+# en un solo candidates.fasta, reescribiendo headers a: >muestra|familia|id_original
+rule collect_candidates:
+    input:
+        dirs = expand("results/bitacora/{sample}", sample=SAMPLES),
+    output:
+        fasta = "results/metalnet/input/candidates.fasta",
+        prov  = "results/metalnet/input/provenance.tsv",
+    params:
+        suffix = config["bitacora_keep_suffix"],
+    conda:
+        "envs/analysis.yaml"
+    log:
+        "logs/collect_candidates.log"
+    script:
+        "scripts/collect_candidates.py"
+
+
+# ---------- Etapa 3: MetalNet2 (ColabFold) ----------
+# Usa tu entorno ya funcional por ruta absoluta (ver config.yaml). NO lleva
+# 'conda:' a proposito. Es la costura del pipeline: pesada, necesita internet,
+# GPU opcional. Se puede correr aparte y el pipeline retoma solo.
+rule metalnet:
+    input:
+        fasta = "results/metalnet/input/candidates.fasta",
+    output:
+        pairs = "results/metalnet/output/pred_pairs.tsv",
+    params:
+        py     = config["metalnet_python"],
+        script = config["metalnet_script"],
+        msa    = config["metalnet_msa_source"],
+        gpu    = 1 if config["metalnet_use_gpu"] else 0,
+    threads:
+        config["metalnet_threads"]
+    log:
+        "logs/metalnet.log"
+    shell:
+        r"""
+        bash workflow/scripts/run_metalnet_colabfold.sh \
+            "{params.py}" "{params.script}" \
+            "{input.fasta}" "{output.pairs}" \
+            "{params.msa}" {threads} {params.gpu} \
+            2>&1 | tee {log}
+        """
+
+
+# ---------- Etapa 4: anotar la salida de MetalNet2 ----------
+rule parse_metalnet:
+    input:
+        pairs = "results/metalnet/output/pred_pairs.tsv",
+        prov  = "results/metalnet/input/provenance.tsv",
+    output:
+        table = "results/tables/metalnet_sites_annotated.tsv",
+    conda:
+        "envs/analysis.yaml"
+    log:
+        "logs/parse_metalnet.log"
+    script:
+        "scripts/parse_metalnet.py"
+
+
+# ---------- Etapa 5: figuras ----------
+rule plots:
+    input:
+        table = "results/tables/metalnet_sites_annotated.tsv",
+    output:
+        "results/figures/sites_per_family.png",
+    conda:
+        "envs/analysis.yaml"
+    log:
+        "logs/plots.log"
+    script:
+        "scripts/plots.py"

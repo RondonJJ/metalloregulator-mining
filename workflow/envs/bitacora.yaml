@@ -1,0 +1,9 @@
+name: bitacora
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - blast          # BLAST+ (tblastn/blastp)
+  - hmmer          # perfiles HMM
+  - perl
+  - gemoma         # solo necesario para genome/full mode

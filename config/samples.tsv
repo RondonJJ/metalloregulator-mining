@@ -1,2 +1,2 @@
 sample	genome_fasta	genome_gff	proteins_fasta	evalue
-MtubH37Rv	resources/genomes/MtubH37Rv.fasta	resources/genomes/MtubH37Rv.gff3	resources/genomes/MtubH37Rv.faa	1e-5
+MtubH37Rv	/users-d2/j.rondon/arsR/SSNs_results_PAPER/bitacora_results/mycoGenomes/Mtub_H37Rv/H37Rv.fna	/users-d2/j.rondon/arsR/SSNs_results_PAPER/bitacora_results/mycoGenomes/Mtub_H37Rv/H37Rv.gff_reformatted.gff3	/users-d2/j.rondon/arsR/SSNs_results_PAPER/bitacora_results/mycoGenomes/Mtub_H37Rv/translate.pep.fasta	1e-5

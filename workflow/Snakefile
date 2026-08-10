@@ -1,10 +1,12 @@
 # =====================================================================
 # Pipeline: mineria de metalorreguladores (BITACORA -> MetalNet2 -> analisis)
 #
-# Correr LOCAL (sin cola):     snakemake --use-conda --cores 4
-# Correr en tu server SGE:     snakemake --use-conda --profile workflow/profiles/sge
-# Ver el DAG:                  snakemake --dag | dot -Tpng > dag.png
-# Reporte para publicar:       snakemake --report report.html
+# Correr (en el server, dentro del env 'smk'):
+#   conda activate smk
+#   snakemake -n                                  # dry-run: valida el DAG
+#   snakemake --use-conda --cores 10              # ejecuta
+# Solo una etapa:
+#   snakemake --use-conda --cores 10 results/bitacora/MtubH37Rv
 # =====================================================================
 
 import pandas as pd
@@ -23,10 +25,11 @@ rule all:
         "results/figures/sites_per_family.png",
 
 
-# ---------- Etapa 1: BITACORA (genome mode), una corrida por muestra ----------
-# BITACORA se configura editando las variables del inicio del script maestro.
-# Copia runBITACORA_genome_mode.sh a un lugar escribible y ajusta sus variables,
-# o adapta el comando de abajo. La salida DEBE quedar dentro de output.outdir.
+# ---------- Etapa 1: BITACORA (genome/full mode), una corrida por muestra ----------
+# Usa workflow/scripts/runBITACORA_templated.sh, que es tu runBITACORA.sh v1.4 pero
+# leyendo la config de variables de entorno. La regla entra al directorio de salida
+# de la muestra y corre BITACORA ahi, para que las carpetas por familia queden
+# dentro de results/bitacora/{sample}/<FAMILIA>/.
 rule bitacora:
     input:
         genome   = lambda wc: samples.loc[wc.sample, "genome_fasta"],
@@ -36,28 +39,57 @@ rule bitacora:
     output:
         outdir = directory("results/bitacora/{sample}"),
     params:
-        bitacora = config["bitacora_dir"],
-        evalue   = lambda wc: samples.loc[wc.sample, "evalue"],
+        scriptdir       = config["bitacora_scriptdir"],
+        gemomap         = config["bitacora_gemomap"],
+        evalue          = lambda wc: samples.loc[wc.sample, "evalue"],
+        gemoma          = config["bitacora_gemoma"],
+        maxintron       = config["bitacora_maxintron"],
+        genomicblastp   = config["bitacora_genomicblastp"],
+        addfilter       = config["bitacora_addfilter"],
+        filterlength    = config["bitacora_filterlength"],
+        retainnonfilter = config["bitacora_retainnonfilter"],
+        clean           = config["bitacora_clean"],
+    threads:
+        config["bitacora_threads"]
     conda:
         "envs/bitacora.yaml"
     log:
         "logs/bitacora/{sample}.log"
     shell:
         r"""
-        mkdir -p {output.outdir}
+        repo=$(pwd)
+        genome=$(realpath {input.genome})
+        gff=$(realpath {input.gff})
+        prot=$(realpath {input.proteins})
+        qdir=$(realpath {input.query_db})
 
-        # >>> EDITAR (1/3): invocacion real de BITACORA en genome mode <<<
-        # Tipicamente se editan las variables NAME/GENOME/GFF/PROTFILE/QUERYDIR/
-        # BITACORA/EVALUE/THREADS al inicio del script maestro. Asegurate de que
-        # todas las salidas caigan dentro de {output.outdir}.
-        bash {params.bitacora}/runBITACORA_genome_mode.sh \
-            2>&1 | tee {log}
+        mkdir -p {output.outdir}
+        cd {output.outdir}
+
+        export SCRIPTDIR="{params.scriptdir}"
+        export GEMOMAP="{params.gemomap}"
+        export NAME="{wildcards.sample}"
+        export GENOME="$genome"
+        export GFFFILE="$gff"
+        export PROTFILE="$prot"
+        export QUERYDIR="$qdir"
+        export EVALUE="{params.evalue}"
+        export THREADS="{threads}"
+        export GEMOMA="{params.gemoma}"
+        export MAXINTRON="{params.maxintron}"
+        export GENOMICBLASTP="{params.genomicblastp}"
+        export ADDFILTER="{params.addfilter}"
+        export FILTERLENGTH="{params.filterlength}"
+        export RETAINNONFILTER="{params.retainnonfilter}"
+        export CLEAN="{params.clean}"
+
+        bash "$repo/workflow/scripts/runBITACORA_templated.sh" 2>&1 | tee "$repo/{log}"
         """
 
 
 # ---------- Etapa 2: recolectar candidatos para MetalNet2 ----------
 # Junta todos los *_idseqsclustered.fasta (todas las familias, todas las muestras)
-# en un solo candidates.fasta, reescribiendo headers a: >muestra|familia|id_original
+# en un solo candidates.fasta, con headers: >muestra|familia|id_original
 rule collect_candidates:
     input:
         dirs = expand("results/bitacora/{sample}", sample=SAMPLES),
@@ -75,9 +107,7 @@ rule collect_candidates:
 
 
 # ---------- Etapa 3: MetalNet2 (ColabFold) ----------
-# Usa tu entorno ya funcional por ruta absoluta (ver config.yaml). NO lleva
-# 'conda:' a proposito. Es la costura del pipeline: pesada, necesita internet,
-# GPU opcional. Se puede correr aparte y el pipeline retoma solo.
+# Usa tu entorno ya funcional por ruta absoluta (config.yaml). NO lleva 'conda:'.
 rule metalnet:
     input:
         fasta = "results/metalnet/input/candidates.fasta",

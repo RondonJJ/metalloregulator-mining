@@ -3,7 +3,7 @@ channels:
   - conda-forge
   - bioconda
 dependencies:
-  - blast          # BLAST+ (tblastn/blastp)
-  - hmmer          # perfiles HMM
+  - blast          # BLAST+ (tblastn/blastp/makeblastdb)
+  - hmmer          # perfiles HMM (hmmsearch/hmmbuild)
   - perl
-  - gemoma         # solo necesario para genome/full mode
+  # - gemoma       # descomentar solo si en algun caso usas GEMOMA=T

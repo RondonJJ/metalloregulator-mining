@@ -2,15 +2,25 @@
 # =====================================================================
 # MetalNet2 en modo ColabFold, parametrizado.
 # Basado en el script que ya te funciono. Se quitaron las directivas SGE
-# (#$ ...) porque Snakemake envia el trabajo a la cola via el perfil.
+# (las maneja el wrapper de qsub / Snakemake).
+#
+# IMPORTANTE: activa el env 'metalnet' ANTES de correr, para que los
+# subprocesos que MetalNet lanza con os.system() (p.ej. search_msa.py)
+# tambien hereden ese entorno. Sin esto, el subproceso usa otro Python
+# y falla con "No module named 'absl'".
 #
 # Uso:
 #   run_metalnet_colabfold.sh PYTHON SCRIPT INPUT_FASTA OUTPUT_PAIRS MSA_SOURCE THREADS USE_GPU
 # =====================================================================
 set -euo pipefail
 
-PYTHON="$1"          # ej: /users-d2/j.rondon/miniconda3/envs/metalnet/bin/python
-SCRIPT="$2"          # ej: .../MetalNet2/model/scripts/run_prediction_workflow.py
+# ---- Activar el entorno de MetalNet ----
+# Ajusta la ruta si tu miniconda esta en otro lugar.
+source ~/miniconda3/etc/profile.d/conda.sh
+conda activate metalnet
+
+PYTHON="$1"          # (informativo) ruta al python de metalnet
+SCRIPT="$2"          # .../MetalNet2/model/scripts/run_prediction_workflow.py
 INPUT_FASTA="$3"
 OUTPUT_PAIRS="$4"
 MSA_SOURCE="$5"      # colabfold
@@ -28,7 +38,9 @@ if [ "$USE_GPU" = "1" ]; then
     CUDA_ARG=(--cuda 1)   # acelera ESM2 si el nodo tiene GPU
 fi
 
-"$PYTHON" "$SCRIPT" \
+# Con el env ya activo, usamos 'python' (el de metalnet) en vez de la ruta absoluta,
+# asi el proceso principal y sus subprocesos comparten el mismo interprete.
+python "$SCRIPT" \
     --input_fasta "$INPUT_FASTA" \
     --msa_source "$MSA_SOURCE" \
     --output_pairs "$OUTPUT_PAIRS" \

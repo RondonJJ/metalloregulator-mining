@@ -22,3 +22,8 @@ metalnet_script: "/users-d2/j.rondon/programas/MetalNet2/model/scripts/run_predi
 metalnet_msa_source: "colabfold"
 metalnet_use_gpu: false
 metalnet_threads: 4
+
+# ---- Analisis / figuras ----
+profiles_map: "config/profiles.tsv"
+metalnet_min_prob: 0.0
+metalnet_require_graph_filter: false

@@ -21,8 +21,12 @@ SAMPLES = samples["sample"].tolist()
 # ---------- Objetivo final ----------
 rule all:
     input:
-        "results/tables/metalnet_sites_annotated.tsv",
-        "results/figures/sites_per_family.png",
+        "results/tables/metalnet_pairs_annotated.tsv",
+        "results/tables/regulators_per_protein.tsv",
+        "results/tables/regulators_per_family.tsv",
+        "results/tables/regulators_per_genome.tsv",
+        "results/figures/regulators_per_family.png",
+        "results/figures/regulators_per_genome.png",
 
 
 # ---------- Etapa 1: BITACORA (genome/full mode), una corrida por muestra ----------
@@ -133,12 +137,21 @@ rule metalnet:
 
 
 # ---------- Etapa 4: anotar la salida de MetalNet2 ----------
+# Mapea perfil->familia (config/profiles.tsv), cuenta hits unicos y genera
+# tablas a nivel par, proteina, familia y genoma.
 rule parse_metalnet:
     input:
-        pairs = "results/metalnet/output/pred_pairs.tsv",
-        prov  = "results/metalnet/input/provenance.tsv",
+        pairs    = "results/metalnet/output/pred_pairs.tsv",
+        prov     = "results/metalnet/input/provenance.tsv",
+        profiles = config["profiles_map"],
     output:
-        table = "results/tables/metalnet_sites_annotated.tsv",
+        pairs   = "results/tables/metalnet_pairs_annotated.tsv",
+        perprot = "results/tables/regulators_per_protein.tsv",
+        perfam  = "results/tables/regulators_per_family.tsv",
+        pergen  = "results/tables/regulators_per_genome.tsv",
+    params:
+        min_prob      = config["metalnet_min_prob"],
+        require_graph = config["metalnet_require_graph_filter"],
     conda:
         "envs/analysis.yaml"
     log:
@@ -150,9 +163,11 @@ rule parse_metalnet:
 # ---------- Etapa 5: figuras ----------
 rule plots:
     input:
-        table = "results/tables/metalnet_sites_annotated.tsv",
+        perfam = "results/tables/regulators_per_family.tsv",
+        pergen = "results/tables/regulators_per_genome.tsv",
     output:
-        "results/figures/sites_per_family.png",
+        perfamily_png = "results/figures/regulators_per_family.png",
+        pergenome_png = "results/figures/regulators_per_genome.png",
     conda:
         "envs/analysis.yaml"
     log:

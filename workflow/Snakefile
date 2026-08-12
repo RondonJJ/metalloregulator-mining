@@ -23,10 +23,13 @@ rule all:
     input:
         "results/tables/metalnet_pairs_annotated.tsv",
         "results/tables/regulators_per_protein.tsv",
+        "results/tables/regulators_per_profile.tsv",
         "results/tables/regulators_per_family.tsv",
+        "results/tables/regulators_per_family_metal.tsv",
         "results/tables/regulators_per_genome.tsv",
-        "results/figures/regulators_per_family.png",
-        "results/figures/regulators_per_genome.png",
+        "results/figures/regulators_per_family_metal.svg",
+        "results/figures/regulators_per_family.svg",
+        "results/figures/regulators_per_genome.svg",
 
 
 # ---------- Etapa 1: BITACORA (genome/full mode), una corrida por muestra ----------
@@ -147,7 +150,9 @@ rule parse_metalnet:
     output:
         pairs   = "results/tables/metalnet_pairs_annotated.tsv",
         perprot = "results/tables/regulators_per_protein.tsv",
+        perprof = "results/tables/regulators_per_profile.tsv",
         perfam  = "results/tables/regulators_per_family.tsv",
+        perfam_metal = "results/tables/regulators_per_family_metal.tsv",
         pergen  = "results/tables/regulators_per_genome.tsv",
     params:
         min_prob      = config["metalnet_min_prob"],
@@ -160,14 +165,19 @@ rule parse_metalnet:
         "scripts/parse_metalnet.py"
 
 
-# ---------- Etapa 5: figuras ----------
+# ---------- Etapa 5: figuras (SVG + PDF) ----------
 rule plots:
     input:
-        perfam = "results/tables/regulators_per_family.tsv",
-        pergen = "results/tables/regulators_per_genome.tsv",
+        perfam       = "results/tables/regulators_per_family.tsv",
+        pergen       = "results/tables/regulators_per_genome.tsv",
+        perfam_metal = "results/tables/regulators_per_family_metal.tsv",
     output:
-        perfamily_png = "results/figures/regulators_per_family.png",
-        pergenome_png = "results/figures/regulators_per_genome.png",
+        fam_metal_svg = "results/figures/regulators_per_family_metal.svg",
+        fam_metal_pdf = "results/figures/regulators_per_family_metal.pdf",
+        perfamily_svg = "results/figures/regulators_per_family.svg",
+        perfamily_pdf = "results/figures/regulators_per_family.pdf",
+        pergenome_svg = "results/figures/regulators_per_genome.svg",
+        pergenome_pdf = "results/figures/regulators_per_genome.pdf",
     conda:
         "envs/analysis.yaml"
     log:

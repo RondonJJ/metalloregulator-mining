@@ -1,140 +1,77 @@
 # metalloregulator-mining
 
-Downstream pipeline to **mine, confirm and characterise bacterial metalloregulators**
-from genome annotations, starting from candidate transcription factors recovered
-by SSN-derived HMM profiles + [BITACORA](https://github.com/molevol-ub/bitacora),
-adding **coevolution-based metal-site prediction** ([MetalNet](https://github.com/wangchulab/MetalNet))
-and **genomic-context** evidence.
+Pipeline reproducible para minar metalorreguladores por familia
+(**BITACORA → MetalNet2 → análisis → figuras**), a partir de perfiles HMM
+y una base de secuencias de clusters obtenidos por SSN.
 
-This repository holds the code, result tables and figures for the genome-mining
-part of the study on *Mycobacterium tuberculosis* H37Rv, *M. avium* subsp.
-*hominissuis*, *Vibrio cholerae* RFB16 and *V. vulnificus* NBRC 15645.
+## Idea de diseño
 
-> It does **not** re-implement BITACORA, HMMER, HHblits/ColabFold or MetalNet —
-> those are external tools. This repo covers everything **after** BITACORA:
-> consolidating candidates, running MetalNet, predicting metal-coordination
-> sites, and cross-referencing with genomic neighbourhood.
-
----
-
-## Pipeline overview
+Cada etapa declara sus entradas y salidas; Snakemake solo re-corre lo que cambió.
+El mismo `Snakefile` funciona **local** (sin cola) o en tu **server SGE** (con un
+perfil). El paso pesado (MetalNet2) está aislado como una *costura*: se puede
+correr aparte y el pipeline retoma solo.
 
 ```
-SSN clusters ──▶ HMM profiles ──▶ BITACORA search        (external; not in this repo)
-                                        │
-                                        ▼
-                        [ prepare_metalnet_input.py ]     consolidate + dedup candidates
-                                        │  candidates.fasta + membership.tsv
-                                        ▼
-                        [ workflow/*.sh (SGE) ]           MSAs + MetalNet2 (ColabFold or HHblits)
-                                        │  pred_pairs.tsv
-                                        ▼
-                        [ summarize_metalnet.py ]         per-protein CHED metal-site calls
-                                        │  site_summary.tsv / confident_pairs.tsv
-                                        ▼
-                        [ neighborhood_analysis.py ]      metal-related genes in the vicinity
-                                        │  neighborhood_table.tsv + master table
-                                        ▼
-                        [ family_genome_tables.py ]       counts by family × genome
-                        [ figures/plot_metal_by_genome.py ]  metal-coverage figure
+config/config.yaml     -> rutas y parametros (edita aqui, no en los scripts)
+config/samples.tsv     -> genomas a minar
+workflow/Snakefile     -> las 5 etapas
+workflow/scripts/      -> tus scripts (incluye run_metalnet_colabfold.sh)
+workflow/envs/         -> entornos conda por etapa (versiones fijadas)
+resources/             -> inputs (query_db, genomas)  [no se versionan]
+results/               -> salidas                       [no se versionan]
 ```
 
----
+## Paso previo MANUAL (antes de correr el pipeline)
 
-## Repository layout
+Preparar y **verificar** los archivos de cada genoma con `Tools/` de BITACORA
+(formato de GFF, inferir/reformatear proteínas, coincidencia de IDs entre GFF y
+proteínas). Cuando los 3 archivos por muestra estén listos, cárgalos en
+`config/samples.tsv`.
 
-```
-scripts/     Python analysis (no external deps beyond the std lib)
-  prepare_metalnet_input.py   BITACORA FASTAs -> deduplicated candidates.fasta + membership.tsv
-  summarize_metalnet.py       MetalNet pred_pairs.tsv -> per-protein site summary
-  neighborhood_analysis.py    genome GFF + candidates -> genomic-neighbourhood / "effective" table
-  family_genome_tables.py     site/total counts per family and genome
+## Antes de correr: 3 cosas a editar
 
-workflow/    Cluster (SGE/qsub) scripts to run MSAs + MetalNet2
-  run_metalnet_colabfold_PILOT.sh   3-sequence test (ColabFold MSA route)
-  run_metalnet_colabfold.sh         full run (ColabFold MSA route, recommended)
-  00_split.sh 01_make_msas.sh 02_build_manifest.sh 03_run_metalnet.sh   HHblits route (plan B)
+1. **`workflow/Snakefile`, regla `bitacora`** — la invocación real de
+   `runBITACORA_genome_mode.sh` (editando las variables del script maestro).
+   La salida debe caer dentro de `results/bitacora/{sample}`.
+2. **`workflow/scripts/parse_metalnet.py`** — el nombre real de la columna de ID
+   de proteína en `pred_pairs.tsv` (hay autodetección, confírmala).
+3. **`workflow/scripts/plots.py`** — adapta/añade tus gráficos previos.
 
-results/     Result tables produced for the paper
-  candidates.fasta, membership.tsv
-  full_run/  site_summary, confident_pairs, master_candidates(_completed),
-             neighborhood_table, counts_by_genome_family, family/genome_success, genome_family_matrix
-  pilot_run/ site_summary, confident_pairs
+En `config/config.yaml` revisa además las rutas de tu entorno de MetalNet2.
 
-figures/     Editable SVG figures + their generators
-  metal_by_genome.svg          metal × genome coverage panel
-  plot_metal_by_genome.py      generator for the above
-  Fig5_with_panelE.svg         full Figure 5 (A–D) + panel E merged
-  build_fig5_panelE.py         merges panel E under an existing Fig5 base SVG
+## Cómo correr
 
-docs/
-  INSTRUCTIVO.md               step-by-step how-to (Spanish)
-```
-
----
-
-## Requirements
-
-- **Python ≥ 3.8** — analysis scripts use only the standard library (no pip installs needed).
-- **External tools** (for the `workflow/` stage, on your cluster):
-  MetalNet2, and either ColabFold (remote MMseqs2 API, needs internet on the node)
-  or HHblits + a UniRef30/BFD database. SGE/`qsub` for job submission.
-- Figures are plain SVG; edit in Inkscape/Illustrator or render with any SVG tool.
-
-See `requirements.txt` for optional Python helpers.
-
----
-
-## Quick start (analysis only, from BITACORA output)
+Local (una laptop, sin cola):
 
 ```bash
-# 1) consolidate BITACORA candidates (<root>/<genome>/<family>/*.fasta)
-python scripts/prepare_metalnet_input.py -i Results_Bita_-5 -o metalnet_input
-
-# 2) run MetalNet2 on the cluster (see docs/INSTRUCTIVO.md and workflow/)
-#    -> produces output/pred_pairs.tsv
-
-# 3) summarise metal-coordination sites
-python scripts/summarize_metalnet.py -p output/pred_pairs.tsv \
-    -m metalnet_input/membership.tsv \
-    -o results/site_summary.tsv --pairs-out results/confident_pairs.tsv
-
-# 4) genomic neighbourhood (needs whole-genome GFFs) — edit paths inside the script
-python scripts/neighborhood_analysis.py
-
-# 5) family × genome counts and the metal-coverage figure
-python scripts/family_genome_tables.py
-python figures/plot_metal_by_genome.py -o figures/metal_by_genome.svg
+snakemake --use-conda --cores 4
 ```
 
-Full details, cluster commands and interpretation notes are in
-[`docs/INSTRUCTIVO.md`](docs/INSTRUCTIVO.md).
+En tu server SGE (la cola es un perfil opcional, no un requisito del pipeline):
 
----
+```bash
+snakemake --use-conda --profile workflow/profiles/sge
+```
 
-## Interpreting the results
+Solo hasta preparar el input de MetalNet2 (para quien no tenga GPU/internet):
 
-- `confident_pairs.tsv` — the high-confidence coevolving CHED residue pairs
-  (`filter_by_graph == 1` in MetalNet output); positions are **1-based**.
-- `site_summary.tsv` — one row per protein: whether a metal site was predicted,
-  which residues, CHED composition.
-- `master_candidates_completed.tsv` — one row per (genome, accession) with the
-  MetalNet call **and** the genomic-neighbourhood flags, plus an `effective_*`
-  column (predicted site **and** an adjacent metal-homeostasis gene).
+```bash
+snakemake --use-conda --cores 4 results/metalnet/input/candidates.fasta
+```
 
-**Caveats.** A predicted site supports metalloregulator assignment but the
-absence of one is not proof of non-binding (divergent/carboxylate sites,
-global regulators such as Fur/Zur). Homology and neighbourhood **approximate**
-the sensed metal; they do not resolve specificity. See the paper for details.
+## MetalNet2: lo que hay que saber
 
----
+- Usa **tu entorno conda ya funcional** por ruta absoluta (ver `config.yaml`),
+  no se recrea desde un yaml. El arreglo definitivo de portabilidad es empaquetarlo
+  en un contenedor **Apptainer/Singularity** (construir la imagen una vez y compartirla).
+- `--msa_source colabfold` **necesita internet en el nodo** y es no-determinista
+  (la base remota cambia con el tiempo). `--keep_inter_files` cachea los MSA.
+- **GPU es opcional**: por defecto corre ESM2 en CPU (más lento). Para acelerar,
+  poné `metalnet_use_gpu: true` en `config.yaml`.
 
-## Citing
+## Para publicar / dejar registro
 
-If you use this code, please cite the associated paper (see `CITATION.cff`)
-and the external tools it builds on: BITACORA, MetalNet, HMMER, and
-ColabFold/HHblits.
-
-## License
-
-Code released under the MIT License (see `LICENSE`).
+```bash
+conda env export --no-builds -n metalnet > workflow/envs/metalnet.lock.yaml  # congela tu env
+snakemake --report report.html                                              # DAG + versiones
+```

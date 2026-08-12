@@ -115,6 +115,9 @@ rule collect_candidates:
 
 # ---------- Etapa 3: MetalNet2 (ColabFold) ----------
 # Usa tu entorno ya funcional por ruta absoluta (config.yaml). NO lleva 'conda:'.
+# Corre dentro de results/metalnet/scratch/ para que las carpetas intermedias de
+# ColabFold (*_env, etc.) NO caigan en la raiz del repo. Los MSA/embeddings quedan
+# en results/metalnet/output/ (work_dir derivado de la ruta de salida).
 rule metalnet:
     input:
         fasta = "results/metalnet/input/candidates.fasta",
@@ -131,11 +134,16 @@ rule metalnet:
         "logs/metalnet.log"
     shell:
         r"""
-        bash workflow/scripts/run_metalnet_colabfold.sh \
+        repo=$(pwd)
+        fasta=$(realpath {input.fasta})
+        out="$repo/{output.pairs}"
+        mkdir -p "$(dirname "$out")" results/metalnet/scratch
+        cd results/metalnet/scratch
+        bash "$repo/workflow/scripts/run_metalnet_colabfold.sh" \
             "{params.py}" "{params.script}" \
-            "{input.fasta}" "{output.pairs}" \
+            "$fasta" "$out" \
             "{params.msa}" {threads} {params.gpu} \
-            2>&1 | tee {log}
+            2>&1 | tee "$repo/{log}"
         """
 
 

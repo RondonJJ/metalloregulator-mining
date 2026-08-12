@@ -26,4 +26,4 @@ metalnet_threads: 4
 # ---- Analisis / figuras ----
 profiles_map: "config/profiles.tsv"
 metalnet_min_prob: 0.0
-metalnet_require_graph_filter: false
+metalnet_require_graph_filter: true

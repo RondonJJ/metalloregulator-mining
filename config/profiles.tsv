@@ -1,14 +1,14 @@
-profile	family
-BsCzrA	ArsR
-mtNmtR	ArsR
-ecFur	Fur
-ecZur	Fur
-ecZntR	MerR
-PbrR	MerR
-CopY_saMecI	CopY
-CsoR_bsCsoR	CsoR
-DtxR_bsMntR	DtxR
-GntR_LldR	GntR
-MarR_AdcR	MarR
-Rrf2_ecIscR	Rrf2
-TetR_SczA	TetR
+profile	family	metal
+BsCzrA	ArsR	Zn/Co
+mtNmtR	ArsR	Ni/Co
+ecFur	Fur	Fe
+ecZur	Fur	Zn
+ecZntR	MerR	Zn
+PbrR	MerR	Pb
+CopY_saMecI	CopY	Cu
+CsoR_bsCsoR	CsoR	Cu
+DtxR_bsMntR	DtxR	Mn/Fe
+GntR_LldR	GntR	vario
+MarR_AdcR	MarR	Zn
+Rrf2_ecIscR	Rrf2	Fe-S
+TetR_SczA	TetR	Zn

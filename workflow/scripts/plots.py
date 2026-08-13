@@ -1,48 +1,46 @@
 """
 Figuras del pipeline. SIEMPRE en SVG y PDF (nunca PNG). Textos en INGLES.
 
-- regulators_per_family_metal : heatmap familia x metal, un panel por genoma,
-  metales agrupados por categoria, escala por tramos (estilo Fig5). Sugiere con
-  que familias cuenta cada genoma para sensar cada metal. Perfiles colapsados a
-  familia; metal = union de los perfiles.
-- regulators_per_family : reguladores por familia (con/sin sitio CHDE).
-- regulators_per_genome : total por genoma.
+- metal_family_matrix : figura estilo Fig5 panel D. Una sola grilla metal x genoma;
+  cada celda lista las FAMILIAS (nombre completo) que sensan ese metal, en azul
+  oscuro si tienen >=1 sitio CHDE en ese genoma, claro si no. Superindice = nº de
+  reguladores de esa familia en ese genoma (permite rastrear cuanto se repite una
+  familia entre metales). El vinculo familia->metales sale de config/family_metals.tsv.
+- regulators_per_family  : reguladores por familia (con/sin sitio CHDE).
+- regulators_per_genome  : total por genoma.
 
-Para reordenar/recategorizar metales, edita METAL_CATEGORIES abajo.
+Editables: METAL_CATEGORIES y FAMILY_ORDER (abajo). El mapeo familia->metales se
+edita en config/family_metals.tsv.
 """
 import pandas as pd
 import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from matplotlib.colors import ListedColormap, BoundaryNorm
 from matplotlib.patches import Patch
-import matplotlib.transforms as mtransforms
+from math import ceil
 from pathlib import Path
 
-# --- categorias de metales (editable). Solo se muestran los presentes en los datos ---
+# ---- Font settings ----
+plt.rcParams["font.family"] = "serif"
+plt.rcParams["font.weight"] = "heavy"
+
 METAL_CATEGORIES = [
     ("Essential metals", ["Fe", "Mn", "Zn", "Ni", "Co", "Cu"]),
     ("Xenobiotics",      ["Cd", "Pb", "Hg", "Ag", "Au"]),
     ("Metalloids",       ["As", "Sb", "Bi"]),
     ("Oxyanions",        ["Mo", "W"]),
-    ("Other",            ["Fe-S", "vario"]),
 ]
-# etiquetas de metal en ingles para el eje
-METAL_LABELS = {"vario": "various", "(sin metal)": "unassigned"}
+# orden de las familias dentro de cada celda (como en la Fig5)
+FAMILY_ORDER = ["ArsR", "MerR", "Fur", "CsoR", "CopY", "MarR", "GntR",
+                "TetR", "DtxR", "Rrf2", "LysR", "NikR"]
+PER_LINE = 4                 # familias por linea dentro de una celda
+C_DARK = "#1f4e79"; C_LIGHT = "#c6dbef"
+T_DARK = "white";   T_LIGHT = "#12335a"
 
-# escala por tramos (estilo Fig5): 0 / 1-33 / 34-66 / 67-99 / 100 %
-BIN_COLORS = ["#eef4fb", "#c6dbef", "#6baed6", "#2171b5", "#08306b"]
-BIN_BOUNDS = [0.0, 0.0001, 0.335, 0.665, 0.9999, 1.0001]
-BIN_LABELS = ["0%", "1–33%", "34–66%", "67–99%", "100%"]
-NA_COLOR = "#d9d9d9"
-
-C_SITE = "#1f4e79"
-C_NONE = "#a6c8e8"
-
-perfam       = pd.read_csv(snakemake.input.perfam, sep="\t")        # noqa: F821
-pergen       = pd.read_csv(snakemake.input.pergen, sep="\t")        # noqa: F821
-perfam_metal = pd.read_csv(snakemake.input.perfam_metal, sep="\t")  # noqa: F821
+perfam       = pd.read_csv(snakemake.input.perfam, sep="\t")         # noqa: F821
+pergen       = pd.read_csv(snakemake.input.pergen, sep="\t")         # noqa: F821
+family_metals_df = pd.read_csv(snakemake.input.family_metals, sep="\t")  # noqa: F821
 
 out = snakemake.output  # noqa: F821
 for p in out:
@@ -55,84 +53,77 @@ def save(fig, svg_path, pdf_path):
     plt.close(fig)
 
 
-# ========== Figura 1: familia x metal (un panel por genoma) ==========
-present_metals = set(perfam_metal["metal"])
-metal_order, cat_of = [], {}
-for cat, mets in METAL_CATEGORIES:
-    for m in mets:
-        if m in present_metals and m not in metal_order:
-            metal_order.append(m); cat_of[m] = cat
-for m in sorted(present_metals):          # cualquiera no listado -> Other
-    if m not in metal_order:
-        metal_order.append(m); cat_of[m] = "Other"
+# ========== Figura 1: matriz metal x genoma (estilo Fig5 panel D) ==========
+family_metals = {r["family"]: set(str(r["metals"]).split(","))
+                 for _, r in family_metals_df.iterrows()}
+# stats por (sample, family) -> (n_regulators, n_with_site)
+stats = {(r["sample"], r["family"]): (int(r["n_regulators"]), int(r["n_with_chde_site"]))
+         for _, r in perfam.iterrows()}
+samples = sorted(perfam["sample"].unique())
 
-families = sorted(perfam_metal["family"].unique())
-samples = sorted(perfam_metal["sample"].unique())
+sensed = set().union(*family_metals.values()) if family_metals else set()
+rows = [(cat, m) for cat, mets in METAL_CATEGORIES for m in mets if m in sensed]
+n_rows, n_cols = len(rows), len(samples)
 
-cmap = ListedColormap(BIN_COLORS); cmap.set_bad(NA_COLOR)
-norm = BoundaryNorm(BIN_BOUNDS, cmap.N)
+fig, ax = plt.subplots(figsize=(n_cols * 2.5 + 2.4, n_rows * 0.62 + 1.6))
+ax.set_xlim(-0.05, n_cols); ax.set_ylim(0, n_rows + 0.9); ax.axis("off")
 
-ncol = 2
-nrow = int(np.ceil(len(samples) / ncol))
-fig, axes = plt.subplots(nrow, ncol, figsize=(1.0 * len(families) * ncol + 3,
-                                              0.45 * len(metal_order) * nrow + 3),
-                         squeeze=False)
+# encabezados de columna (genomas)
+for j, s in enumerate(samples):
+    ax.text(j + 0.5, n_rows + 0.4, s, ha="center", va="center",
+            fontsize=10, fontstyle="italic", fontweight="bold")
+# lineas verticales
+for j in range(n_cols + 1):
+    ax.plot([j, j], [0, n_rows], color="#dddddd", lw=0.6, zorder=0)
 
-for idx, s in enumerate(samples):
-    ax = axes[idx // ncol][idx % ncol]
-    sub = perfam_metal[perfam_metal["sample"] == s]
-    lut = {(r["metal"], r["family"]): (r["frac_with_site"], int(r["n_with_chde_site"]), int(r["n_regulators"]))
-           for _, r in sub.iterrows()}
-    frac = np.full((len(metal_order), len(families)), np.nan)
-    annot = np.empty((len(metal_order), len(families)), dtype=object); annot[:] = ""
-    for i, m in enumerate(metal_order):
-        for j, fam in enumerate(families):
-            if (m, fam) in lut:
-                f, nw, nt = lut[(m, fam)]
-                frac[i, j] = f
-                annot[i, j] = f"{nw}/{nt}"
-    masked = np.ma.masked_invalid(frac)
-    ax.imshow(masked, cmap=cmap, norm=norm, aspect="auto")
-    ax.set_xticks(range(len(families))); ax.set_xticklabels(families, rotation=45, ha="right", fontsize=8)
-    ax.set_yticks(range(len(metal_order)))
-    ax.set_yticklabels([METAL_LABELS.get(m, m) for m in metal_order], fontsize=8)
-    for i in range(len(metal_order)):
-        for j in range(len(families)):
-            if annot[i, j]:
-                dark = (not np.isnan(frac[i, j])) and frac[i, j] >= 0.66
-                ax.text(j, i, annot[i, j], ha="center", va="center", fontsize=6,
-                        color="white" if dark else "#222222")
-    # separadores entre categorias
-    for i, m in enumerate(metal_order):
-        if i != 0 and cat_of[m] != cat_of[metal_order[i - 1]]:
-            ax.axhline(i - 0.5, color="black", lw=0.8)
-    # etiquetas de categoria (solo columna izquierda)
-    if idx % ncol == 0:
-        trans = mtransforms.blended_transform_factory(ax.transAxes, ax.transData)
-        spans, start = [], 0
-        for k in range(1, len(metal_order) + 1):
-            if k == len(metal_order) or cat_of[metal_order[k]] != cat_of[metal_order[start]]:
-                spans.append((cat_of[metal_order[start]], start, k - 1)); start = k
-        for cat, a, b in spans:
-            ax.text(-0.32, (a + b) / 2, cat, transform=trans, rotation=90,
-                    va="center", ha="center", fontsize=8, fontweight="bold", clip_on=False)
-    ax.set_title(s, fontsize=10)
+# filas
+for i, (cat, metal) in enumerate(rows):
+    y_top = n_rows - i
+    ax.text(-0.12, y_top - 0.5, metal, ha="right", va="center", fontsize=9, fontweight="bold")
+    for j, s in enumerate(samples):
+        fams = [f for f in FAMILY_ORDER
+                if metal in family_metals.get(f, set()) and stats.get((s, f), (0, 0))[0] > 0]
+        if not fams:
+            continue
+        lines = ceil(len(fams) / PER_LINE)
+        for k, f in enumerate(fams):
+            line, col = k // PER_LINE, k % PER_LINE
+            x = j + (col + 0.5) * (1.0 / PER_LINE)
+            y = y_top - (line + 0.5) * (1.0 / max(lines, 1))
+            n_reg, n_site = stats[(s, f)]
+            dark = n_site > 0
+            ax.text(x, y, rf"$\mathregular{{{f}}}^{{{n_reg}}}$", ha="center", va="center",
+                    fontsize=6.2, color=T_DARK if dark else T_LIGHT,
+                    bbox=dict(boxstyle="round,pad=0.25",
+                              facecolor=C_DARK if dark else C_LIGHT, edgecolor="none"))
 
-# apagar ejes sobrantes
-for k in range(len(samples), nrow * ncol):
-    axes[k // ncol][k % ncol].axis("off")
+# separadores horizontales por categoria + etiquetas
+ax.plot([0, n_cols], [n_rows, n_rows], color="#333333", lw=1.0)
+prev = None
+cat_rows = {}
+for i, (cat, metal) in enumerate(rows):
+    cat_rows.setdefault(cat, []).append(i)
+    if cat != prev:
+        ax.plot([0, n_cols], [n_rows - i, n_rows - i], color="#333333", lw=1.0)
+        prev = cat
+ax.plot([0, n_cols], [0, 0], color="#333333", lw=1.0)
+for cat, idxs in cat_rows.items():
+    i0, i1 = min(idxs), max(idxs)
+    y = (n_rows - i0) - (i1 - i0 + 1) / 2
+    ax.text(-0.66, y, cat, ha="center", va="center", rotation=90,
+            fontsize=9, fontstyle="italic", fontweight="bold")
 
-legend_patches = [Patch(facecolor=c, edgecolor="#999999", label=l)
-                  for c, l in zip(BIN_COLORS, BIN_LABELS)]
-legend_patches.append(Patch(facecolor=NA_COLOR, edgecolor="#999999", label="n/a"))
-fig.legend(handles=legend_patches, title="% with CHDE site", loc="lower center",
-           ncol=6, frameon=False, bbox_to_anchor=(0.5, -0.02))
-fig.suptitle("Metalloregulators per family and metal", fontsize=13)
-fig.tight_layout(rect=[0, 0.03, 1, 0.97])
-save(fig, out.fam_metal_svg, out.fam_metal_pdf)
+legend = [Patch(facecolor=C_DARK, label="Family with CHDE site"),
+          Patch(facecolor=C_LIGHT, label="Family without CHDE site")]
+fig.legend(handles=legend, loc="lower center", ncol=2, frameon=False,
+           fontsize=9, bbox_to_anchor=(0.5, -0.01))
+ax.set_title("Metalloregulator families per metal and genome\n(superscript = number of regulators)",
+             fontsize=12, pad=16)
+save(fig, out.metal_matrix_svg, out.metal_matrix_pdf)
 
 
 # ========== Figura 2: reguladores por familia ==========
+C_SITE = "#1f4e79"; C_NONE = "#a6c8e8"
 samples_f = sorted(perfam["sample"].unique())
 n = len(samples_f)
 fig, axes = plt.subplots(n, 1, figsize=(9, 3.0 * n), squeeze=False)
@@ -165,4 +156,4 @@ ax.legend(frameon=False)
 fig.tight_layout()
 save(fig, out.pergenome_svg, out.pergenome_pdf)
 
-print("[plots] SVG + PDF generados (ingles, metales por categoria, escala por tramos)")
+print("[plots] metal_family_matrix + per_family + per_genome (SVG + PDF, ingles)")

@@ -24,11 +24,12 @@ out_perprof     = snakemake.output.perprof      # noqa: F821
 out_perfam      = snakemake.output.perfam       # noqa: F821
 out_perfammetal = snakemake.output.perfam_metal # noqa: F821
 out_pergen      = snakemake.output.pergen       # noqa: F821
+out_famids      = snakemake.output.famids       # noqa: F821
 
 min_prob      = float(snakemake.params.min_prob)       # noqa: F821
 require_graph = bool(snakemake.params.require_graph)   # noqa: F821
 
-for p in [out_pairs, out_perprot, out_perprof, out_perfam, out_perfammetal, out_pergen]:
+for p in [out_pairs, out_perprot, out_perprof, out_perfam, out_perfammetal, out_pergen, out_famids]:
     Path(p).parent.mkdir(parents=True, exist_ok=True)
 
 pairs = pd.read_csv(pairs_path, sep="\t")
@@ -125,6 +126,20 @@ for _, r in perfam.iterrows():
 perfam_metal = pd.DataFrame(rows, columns=["sample", "metal", "family", "n_regulators", "n_with_chde_site"])
 perfam_metal["frac_with_site"] = (perfam_metal["n_with_chde_site"] / perfam_metal["n_regulators"]).round(3)
 perfam_metal.to_csv(out_perfammetal, sep="\t", index=False)
+
+# ---- LISTA DE IDs POR FAMILIA (numeracion por proteina, reinicia por genoma) ----
+# Da el "ArsR1, ArsR2, ..." que permite rastrear cada proteina; la numeracion
+# reinicia en cada genoma porque las proteinas son distintas.
+famids = reg_fam.sort_values(["sample", "family", "orig_id"]).copy()
+famids["family_index"] = famids.groupby(["sample", "family"]).cumcount() + 1
+famids["label"] = famids["family"] + famids["family_index"].astype(str)
+famids = famids.rename(columns={"site": "has_chde_site"})
+# perfiles que detectaron cada proteina (por si una proteina la ven 2 perfiles)
+prof_by = (prov.groupby(["sample", "family", "orig_id"])["profile"]
+           .agg(lambda s: ",".join(sorted(set(s)))).rename("profiles").reset_index())
+famids = famids.merge(prof_by, on=["sample", "family", "orig_id"], how="left")
+famids = famids[["sample", "family", "family_index", "label", "orig_id", "profiles", "has_chde_site"]]
+famids.to_csv(out_famids, sep="\t", index=False)
 
 # ---- por GENOMA ----
 pergen = reg_fam.groupby("sample").agg(n_regulators=("orig_id", "nunique")).reset_index()
